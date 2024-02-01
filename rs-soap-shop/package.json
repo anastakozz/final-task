@@ -31,8 +31,7 @@
     "eject": "react-scripts eject",
     "lint": "eslint src/**/*.{ts,tsx}",
     "lint:fix": "eslint --fix 'src/**/*.{ts,tsx}'",
-    "format": "prettier --log-level warn --write 'src/**/*.{ts,tsx,json}'",
-    "win-format": "prettier --log-level warn --write 'find src -type f \\( -name \"*.js\" -o -name \"*.jsx\" -o -name \"*.ts\" -o -name \"*.tsx\" -o -name \"*.css\" -o -name \"*.md\" -o -name \"*.json\" \\) -exec prettier --write {} \\;'",
+    "format:fix": "prettier --write src/.",
     "prepare": "cd .. && husky install rs-soap-shop/.husky"
   },
   "eslintConfig": {

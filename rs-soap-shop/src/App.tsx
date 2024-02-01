@@ -14,7 +14,6 @@ import Footer from './components/footer';
 import PageNotFound from './pages/pageNotFound';
 import DetailedProductPage from './pages/detailedProductPage';
 import { setAnonymousToken } from './services/registration.service';
-import { getCart } from './services/handleCart';
 import { tokenNames } from './lib/enums';
 const { userToken, anonymous } = tokenNames;
 
@@ -39,19 +38,13 @@ function App() {
   const isSeenBefore = !!localStorage.getItem(`${anonymous}`);
 
   useEffect(() => {
-    if (!isLoggedIn && !isSeenBefore) {
-      setAnonymousToken()
-        .then(() =>
-          getCart()
-            .then(() => setHasToken(true))
-            .catch(err => console.log(err))
-        )
-        .catch(err => console.log(err));
-    } else {
-      getCart()
-        .then(() => setHasToken(true))
-        .catch(err => console.log(err));
+    async function setToken() {
+      if (!isLoggedIn && !isSeenBefore) {
+        await setAnonymousToken()
+      }
+      setHasToken(true);
     }
+    setToken();
   }, []);
 
   return (

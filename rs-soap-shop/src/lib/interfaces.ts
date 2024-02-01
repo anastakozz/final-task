@@ -1,4 +1,4 @@
-import { Category, Keyword, Price, ProductAttributes, ProductImage } from './types';
+import { Category, Keyword, Price, ProductAttributes, ProductImage, ProductListItem } from './types';
 import React from 'react';
 
 export interface ButtonProps {
@@ -113,8 +113,8 @@ export interface Product {
       currencyCode: string;
       centAmount: number;
       fractionDigits: number;
-    }
-  }
+    };
+  };
   id: string;
   productKey?: string;
   version: string;
@@ -244,6 +244,6 @@ export interface NavigationViewProps {
   updateSearchedProducts?: (products: Product[]) => void;
 }
 
-export interface CartProduct {
-  discountCodes?: object[]
+export interface ICart {
+  lineItems: ProductListItem[];
 }

@@ -9,7 +9,6 @@ function LoadingSpinner({ marginTop = '50' }) {
         <img src={loadingGif} alt='loading' />
       </div>
     </div>
-
   );
 }
 

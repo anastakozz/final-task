@@ -1,10 +1,10 @@
-import { getBasicToken } from './registration.service';
 import axios from 'axios';
 import { apiUrl, projectKey } from '../lib/constants';
 import { CategoryData } from '../lib/interfaces';
+import { getTokenFromStorage } from '../lib/utils/getLocalStorageToken';
 
 export async function getCategoryId(key: string) {
-  const accessToken = await getBasicToken();
+  const accessToken = await getTokenFromStorage(true);
   try {
     const response = await axios.get(`${apiUrl}/${projectKey}/categories/key=${key}`, {
       headers: {
@@ -18,7 +18,7 @@ export async function getCategoryId(key: string) {
 }
 
 export async function getCategories() {
-  const accessToken = await getBasicToken();
+  const accessToken = await getTokenFromStorage(true);
   try {
     const response = await axios.get(`${apiUrl}/${projectKey}/categories/`, {
       headers: {

@@ -2,9 +2,10 @@ import { apiUrl, projectKey } from '../lib/constants';
 import { getBasicToken } from './registration.service';
 import axios from 'axios';
 import { CardsPerPage } from '../lib/enums';
+import { getTokenFromStorage } from '../lib/utils/getLocalStorageToken';
 
 export async function getProductsList(isCatalogCalling?: boolean, page = 1) {
-  const accessToken = await getBasicToken();
+  const accessToken = await getTokenFromStorage(true);
   let queryParms;
   if (isCatalogCalling) {
     queryParms = {
@@ -62,7 +63,8 @@ export async function findProducts(inputProductName: string) {
 }
 
 export async function getFiltered(options: string, page = 1) {
-  const accessToken = await getBasicToken();
+  console.log('page', page);
+  const accessToken = await getTokenFromStorage(true);
   try {
     const response = await axios.get(`${apiUrl}/${projectKey}/product-projections/search${options}`, {
       headers: {

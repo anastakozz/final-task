@@ -3,14 +3,14 @@ import EmptyButton from '../../../components/buttons/emptyButton';
 import Card from '../../../components/card';
 import { ReactNode, useContext, useEffect, useState } from 'react';
 import shuffleProducts from '../../../lib/utils/shuffleCards';
-import { Product, ProductCardProps } from '../../../lib/interfaces';
+import { ICart, Product, ProductCardProps } from '../../../lib/interfaces';
 import { getProductsList } from '../../../services/product.service';
 import toCardAdapter from '../../../lib/utils/productDataAdapters.ts/toCardAdapter';
-import { getCart, getProductsInCart } from '../../../services/handleCart';
 import { CartContext } from '../../../App';
+import { ProductListItem } from '../../../lib/types';
 
-async function getRandomCardsData(): Promise<ProductCardProps[]> {
-  const cartProducts = await getProductsInCart();
+async function getRandomCardsData(cart: ICart): Promise<ProductCardProps[]> {
+  const cartProducts = cart?.lineItems.map((a: ProductListItem) => a.productId);
   const data: Product[] = await getProductsList();
 
   if (data) {
@@ -24,32 +24,25 @@ async function getRandomCardsData(): Promise<ProductCardProps[]> {
 }
 
 export default function RandomCardsSection() {
-  const [cart, setCart] = useContext(CartContext);
+  const [cart] = useContext(CartContext);
   const [items, setItems] = useState<ProductCardProps[] | undefined>(undefined);
   const [isDataLoading, setDataLoading] = useState(false);
 
   useEffect(() => {
-    getCart().then(resp => {
-      setCart({ ...cart, ...resp.data });
-    }).catch(err => console.log(err));
-    const fetchData = async () => {
-      const data = await getRandomCardsData();
-      return data;
-    };
-
-    if (!items && !isDataLoading) {
-      setDataLoading(true);
-
-      fetchData()
-        .then(data => setItems(data))
-        .catch(e => {
+    async function getProducts() {
+      if (!items && !isDataLoading) {
+        setDataLoading(true);
+        try {
+          const data = await getRandomCardsData(cart);
+          setItems(data);
+        } catch (e) {
           console.log(e);
-        })
-        .finally(() => {
-          setDataLoading(false);
-        });
+        }
+        setDataLoading(false);
+      }
     }
-  }, []);
+    getProducts();
+  }, [cart]);
 
   return (
     <div role='random-section'>

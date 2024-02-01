@@ -31,7 +31,7 @@ function DetailedProductPage() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const cartProducts = await getProductsInCart();
+      const cartProducts = getProductsInCart(cart);
       const product = await getProductByKey(key);
       if (cartProducts.includes(product.id)) {
         setIsInCart(true);

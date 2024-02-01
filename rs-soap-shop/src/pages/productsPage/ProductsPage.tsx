@@ -12,33 +12,27 @@ import LoadingSpinner from '../../components/loading/loading';
 function ProductsPage() {
   const [products, setProducts] = useState<Product[]>();
   const { category, subcategory } = useParams();
-  const [query, setQuery] = useState(sessionStorage.getItem('query'));
+  // const [query, setQuery] = useState(sessionStorage.getItem('query'));
+  const [query, setQuery] = useState('');
   const [isEndOfPage, setIsEndOfPage] = useState(false);
   const [isUpdatingProducts, setIsUpdatingProducts] = useState(false);
-  if (!sessionStorage.getItem('isLoading')) sessionStorage.setItem('isLoading', 'false');
-  if (!sessionStorage.getItem('currentPage')) sessionStorage.setItem('currentPage', '1');
-
+  // sessionStorage.setItem('isLoading', 'false');
+  const [isLoading, setIsLoading] = useState(false);
+  // if (!sessionStorage.getItem('currentPage')) sessionStorage.setItem('currentPage', '1');
+  const [currentPage, setCurrentPage] = useState(1);
+  console.log(currentPage);
   useEffect(() => {
-    return () => {
-      sessionStorage.setItem('query', '');
-      sessionStorage.setItem('currentPage', '');
-      sessionStorage.setItem('isLoading', 'false');
-    };
+    scrollToTop();
+    // return () => {
+    //   sessionStorage.setItem('query', '');
+    //   sessionStorage.setItem('currentPage', '');
+    //   sessionStorage.setItem('isLoading', 'false');
+    // };
   }, []);
-
-  window.addEventListener('beforeunload', () => {
-    sessionStorage.setItem('query', '');
-    sessionStorage.setItem('currentPage', '');
-    sessionStorage.setItem('isLoading', 'false');
-  });
-
-  function updateSearchedProducts(products: Product[]) {
-    setProducts(products);
-  }
 
   function changeQuery(options: string): void {
     setQuery(options);
-    sessionStorage.setItem('query', options);
+    // sessionStorage.setItem('query', options);
   }
 
   function updateProductsInCategories() {
@@ -49,35 +43,36 @@ function ProductsPage() {
     ).then(categoryId => {
       getFiltered(`?filter=categories.id:"${categoryId}"&${query}`, 1)
         .then(products => {
-        setProducts(products);
-      })
+          setProducts(products);
+        })
         .then(() => {
           setIsUpdatingProducts(false);
-          sessionStorage.setItem('isLoading', 'false');
+          // sessionStorage.setItem('isLoading', 'false');
+          setIsLoading(false);
         });
-    })
+    });
   }
 
   useEffect(() => {
-    scrollToTop();
-  }, []);
-
-  useEffect(() => {
-    sessionStorage.setItem('isLoading', 'true');
-    sessionStorage.setItem('currentPage', '1');
+    setIsLoading(true);
+    setCurrentPage(1);
+    // sessionStorage.setItem('isLoading', 'true');
+    // sessionStorage.setItem('currentPage', '1');
 
     setIsUpdatingProducts(true);
     setIsEndOfPage(false);
     if (category || subcategory) {
       updateProductsInCategories();
     } else {
-      getFiltered(`?${sessionStorage.getItem('query')}`, 1)
+      // getFiltered(`?${sessionStorage.getItem('query')}`, 1)
+      getFiltered(`?${query}`, 1)
         .then(items => {
-        setProducts(items);
-      })
+          setProducts(items);
+        })
         .then(() => {
-            setIsUpdatingProducts(false);
-            sessionStorage.setItem('isLoading', 'false');
+          setIsUpdatingProducts(false);
+          // sessionStorage.setItem('isLoading', 'false');
+          setIsLoading(false);
         });
     }
   }, [category, subcategory, query]);
@@ -99,36 +94,50 @@ function ProductsPage() {
   }, [category, subcategory]);
 
   function loadNextPage() {
-    if (sessionStorage.getItem('isLoading') === 'true') return;
-    sessionStorage.setItem('isLoading', 'true');
-    sessionStorage.setItem('currentPage', String(+sessionStorage.getItem('currentPage') + 1));
+    // if (sessionStorage.getItem('isLoading') === 'true') return;
+    if (isLoading) return;
+    // sessionStorage.setItem('isLoading', 'true');
+    // sessionStorage.setItem('currentPage', String(+sessionStorage.getItem('currentPage') + 1));
+    setIsLoading(true);
+    setCurrentPage(prevState => prevState + 1);
 
-    getFiltered(`?${sessionStorage.getItem('query')}`, +sessionStorage.getItem('currentPage'))
+    // getFiltered(`?${sessionStorage.getItem('query')}`, +sessionStorage.getItem('currentPage'))
+
+  }
+
+  useEffect(() => {
+    getFiltered(`?${query}`, currentPage)
       .then(nextPageProducts => {
         if (nextPageProducts.length > 0) {
           setProducts(prevProducts => [...prevProducts, ...nextPageProducts]);
         } else setIsEndOfPage(true);
       })
       .then(() => {
-        sessionStorage.setItem('isLoading', 'false');
+        // sessionStorage.setItem('isLoading', 'false');
+        setIsLoading(false);
       })
       .catch(error => {
         console.error(error);
       });
-  }
+  }, [currentPage]);
 
   function loadNextPageWithCategory() {
-    if (sessionStorage.getItem('isLoading') === 'true') return;
-    sessionStorage.setItem('isLoading', 'true');
-    sessionStorage.setItem('currentPage', String(+sessionStorage.getItem('currentPage') + 1));
+    // if (sessionStorage.getItem('isLoading') === 'true') return;
+    if (isLoading) return;
+    // sessionStorage.setItem('isLoading', 'true');
+    // sessionStorage.setItem('currentPage', String(+sessionStorage.getItem('currentPage') + 1));
+    setIsLoading(true);
+    setCurrentPage(prevState => prevState + 1);
     getCategoryId(
       subcategory
         ? subcategory.charAt(0).toUpperCase() + subcategory.slice(1)
         : category.charAt(0).toUpperCase() + category.slice(1)
     ).then(categoryId => {
       getFiltered(
-        `?filter=categories.id:"${categoryId}"&${sessionStorage.getItem('query')}`,
-        +sessionStorage.getItem('currentPage')
+        // `?filter=categories.id:"${categoryId}"&${sessionStorage.getItem('query')}`,
+        `?filter=categories.id:"${categoryId}"&${query}`,
+        // +sessionStorage.getItem('currentPage')
+        currentPage
       )
         .then(nextPageProducts => {
           if (nextPageProducts.length > 0) {
@@ -136,7 +145,8 @@ function ProductsPage() {
           } else setIsEndOfPage(true);
         })
         .then(() => {
-          sessionStorage.setItem('isLoading', 'false');
+          // sessionStorage.setItem('isLoading', 'false');
+          setIsLoading(false);
         })
         .catch(error => {
           console.error(error);
@@ -146,13 +156,20 @@ function ProductsPage() {
 
   return (
     <>
-      <BannerPageName {...{ children: 'OUR PRODUCTS' }}></BannerPageName>
+      <BannerPageName {...{ children: 'OUR PRODUCTS' }} />
       <NavigationView
         nav={{ category, subcategory }}
         changeQuery={changeQuery}
-        updateSearchedProducts={updateSearchedProducts}
+        updateSearchedProducts={() => setProducts(products)}
       />
-      {isUpdatingProducts ? <LoadingSpinner marginTop={'60'} /> : <><OurProductsCards {...{ products }} />{!isEndOfPage && <LoadingSpinner marginTop={'10'} />}</>}
+      {isUpdatingProducts ? (
+        <LoadingSpinner marginTop={'60'} />
+      ) : (
+        <>
+          <OurProductsCards {...{ products }} />
+          {!isEndOfPage && <LoadingSpinner marginTop={'10'} />}
+        </>
+      )}
     </>
   );
 }

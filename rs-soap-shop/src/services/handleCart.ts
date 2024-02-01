@@ -1,6 +1,7 @@
 import { getActiveCart, createCart, updateCart, addLineItem, removeLineItem, deleteCart } from './cart.service';
 import { getTokenFromStorage } from '../lib/utils/getLocalStorageToken';
-import { ProductListItem } from '../lib/types';
+import { ProductListItem, responseObject } from '../lib/types';
+import { ICart } from '../lib/interfaces';
 
 export async function getCart() {
   const token = await getTokenFromStorage();
@@ -51,10 +52,9 @@ export async function getSpecificCart(token: string) {
   }
 }
 
-export async function getProductsInCart(): Promise<string[]> {
-  const cart = await getCart();
-  const list = cart.data.lineItems;
-  return list.map((a: ProductListItem) => a.productId);
+export function getProductsInCart(cart: ICart): (string | responseObject)[] {
+  const list = cart.lineItems;
+  return list.map((a) => a.productId);
 }
 
 export async function sendToCart(id: string) {
