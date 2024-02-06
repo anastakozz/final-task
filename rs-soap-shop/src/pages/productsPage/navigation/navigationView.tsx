@@ -6,7 +6,7 @@ import Breadcrumb from '../../../components/BasicBreadcrumbs';
 import React, { useState } from 'react';
 import { NavigationViewProps } from '../../../lib/interfaces';
 
-export function NavigationView({ nav, changeQuery, updateSearchedProducts }: NavigationViewProps) {
+export function NavigationView({ nav, changeQuery, setSearchValue }: NavigationViewProps) {
   const [filterQuery, setFilterQuery] = useState('');
   const [sortQuery, setSortQuery] = useState('');
 
@@ -26,7 +26,7 @@ export function NavigationView({ nav, changeQuery, updateSearchedProducts }: Nav
         <Breadcrumb nav={nav} />
         <div className='flex flex-wrap gap-[10px]'>
           <SelectCategory nav={nav} />
-          <SearchView updateSearchedProducts={updateSearchedProducts} />
+          <SearchView setSearchValue={setSearchValue} />
           <div className='flex flex-wrap gap-[10px] flex-row-reverse'>
             <FilterView changeQuery={updateFilterQuery} />
             <SortingView changeQuery={updateSortQuery} />

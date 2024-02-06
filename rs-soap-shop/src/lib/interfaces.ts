@@ -241,7 +241,7 @@ export interface NavigationViewProps {
     subcategory?: string;
   };
   changeQuery?: (options: string) => void;
-  updateSearchedProducts?: (products: Product[]) => void;
+  setSearchValue?: React.Dispatch<React.SetStateAction<string>>;
 }
 
 export interface ICart {

@@ -32,6 +32,32 @@ const AppLayout = ({ children }: { children: ReactElement }) => {
   );
 };
 
+// const App = () => {
+//   const [yourValue, setYourValue] = useState('initialValue');
+//
+//   // Функция, которая будет вызвана при изменении значения yourValue
+//   const yourFunction = () => {
+//     console.log('Обновленное значение:', yourValue);
+//     // Ваш код, который нужно выполнить при изменении значения
+//   };
+//
+//   // useEffect срабатывает после каждого рендера компонента
+//   useEffect(() => {
+//     yourFunction();
+//   }, [yourValue]); // Указываем зависимость, при изменении которой нужно вызвать useEffect
+//
+//   // Ваш код компонента...
+//
+//   return (
+//     <div>
+//       {/* Ваш код компонента */}
+//       <button onClick={() => setYourValue('новое значение')}>
+//         Изменить значение
+//       </button>
+//     </div>
+//   );
+// };
+
 function App() {
   const [hasToken, setHasToken] = useState<boolean>(false);
   const isLoggedIn = !!localStorage.getItem(`${userToken}`);

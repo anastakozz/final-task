@@ -1,28 +1,30 @@
 import classNames from 'classnames';
 import SearchButton from '../../../../icons/searchButton';
-import { findProducts } from '../../../../services/product.service';
-import React, { useRef } from 'react';
+import React, { useState } from 'react';
 import { NavigationViewProps } from '../../../../lib/interfaces';
 
-export default function SearchView({ updateSearchedProducts }: NavigationViewProps) {
-  const inputRef = useRef(null);
+export default function SearchView({ setSearchValue }: NavigationViewProps) {
+  const [inputValue, setInputValue] = useState('');
 
-  const handleSearch = async () => {
-    const products = await findProducts(inputRef.current.value);
-    updateSearchedProducts(products);
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setInputValue(e.target.value);
   };
 
-  const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
-      handleSearch();
+      setSearchValue(inputValue);
     }
+  };
+
+  const handleButtonClick = () => {
+    setSearchValue(inputValue);
   };
 
   return (
     <div className={'flex'}>
       <div className={'relative flex items-stretch flex-grow'}>
         <input
-          ref={inputRef}
+          value={inputValue}
           placeholder='Search...'
           className={classNames(
             'px-2 py-1 h-[37px]',
@@ -30,7 +32,8 @@ export default function SearchView({ updateSearchedProducts }: NavigationViewPro
             'bg-white rounded-md border border-gray-300 shadow-sm hover:bg-gray-50',
             'focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accentDarkColor dark:focus:ring-accentColor'
           )}
-          onKeyDown={handleKeyPress}
+          onChange={handleInputChange}
+          onKeyDown={handleKeyDown}
         />
         <div
           className={classNames(
@@ -38,7 +41,7 @@ export default function SearchView({ updateSearchedProducts }: NavigationViewPro
             'rounded-md bg-white border-[1px] border-gray-400 shadow-sm',
             'hover:cursor-pointer hover:bg-graySColor active:scale-90'
           )}
-          onClick={handleSearch}
+          onClick={handleButtonClick}
         >
           <SearchButton />
         </div>
