@@ -15,9 +15,14 @@ export enum RemoveMessage {
   inProgress = '...Removing...'
 }
 
-export enum tokenNames {
+export enum TokenNames {
   userToken = 'userToken',
   userTokenRefresh = 'userTokenRefresh',
   anonymous = 'anonymousToken',
   anonymousRefresh = 'anonymousTokenRefresh'
+}
+
+export enum QueryStringPrefix {
+  priceSortLength = 8,
+  nameSortLength = 1
 }

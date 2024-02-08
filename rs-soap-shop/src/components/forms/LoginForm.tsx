@@ -7,8 +7,8 @@ import { validatePassword } from './validateFunctions/password';
 import { LoginData } from '../../lib/interfaces';
 import { useNavigate } from 'react-router-dom';
 import { getToken, login } from '../../services/login.service';
-import { tokenNames } from '../../lib/enums';
-const { userToken, userTokenRefresh } = tokenNames;
+import { TokenNames } from '../../lib/enums';
+const { userToken, userTokenRefresh } = TokenNames;
 
 export const LoginForm = () => {
   const [isSubmitted, setIsSubmitted] = useState(false);

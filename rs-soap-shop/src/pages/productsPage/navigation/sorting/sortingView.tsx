@@ -15,16 +15,16 @@ export default function SortingView({ changeQuery }: OurProductsCardsProps) {
     isSortABC: boolean,
     isSortZYX: boolean
   ): void {
-    if (isSortPriceUp) {
-      sortingQueryString = 'sort=price%20asc';
-    } else if (isSortPriceDown) {
-      sortingQueryString = 'sort=price%20desc';
-    } else if (isSortABC) {
-      sortingQueryString = 'sort=name.en%20asc';
-    } else if (isSortZYX) {
-      sortingQueryString = 'sort=name.en%20desc';
-    } else sortingQueryString = '';
 
+    if (isSortPriceUp) {
+      sortingQueryString = '/search?sort=price%20asc';
+    } else if (isSortPriceDown) {
+      sortingQueryString = '/search?sort=price%20desc';
+    } else if (isSortABC) {
+      sortingQueryString = '?sort=name.en%20asc';
+    } else if (isSortZYX) {
+      sortingQueryString = '?sort=name.en%20desc';
+    } else sortingQueryString = '';
     changeQuery(sortingQueryString);
   }
 

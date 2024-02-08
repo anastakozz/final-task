@@ -1,6 +1,6 @@
 import { getToken, login, relogin } from './login.service';
-import { tokenNames } from '../lib/enums';
-const { userToken, userTokenRefresh } = tokenNames;
+import { TokenNames } from '../lib/enums';
+const { userToken, userTokenRefresh } = TokenNames;
 
 export async function handleLogin(email: string, password: string) {
   try {

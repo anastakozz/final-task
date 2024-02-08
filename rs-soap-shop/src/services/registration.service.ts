@@ -1,8 +1,8 @@
 import axios, { AxiosError } from 'axios';
 import { RegistrationData, ResultProps } from '../lib/interfaces';
 import { apiUrl, authUrl, projectKey, clientId, secret } from '../lib/constants';
-import { tokenNames } from '../lib/enums';
-const { anonymous, anonymousRefresh } = tokenNames;
+import { TokenNames } from '../lib/enums';
+const { anonymous, anonymousRefresh } = TokenNames;
 
 export async function getBasicToken() {
   try {

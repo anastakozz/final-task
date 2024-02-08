@@ -11,6 +11,7 @@ function ProductsPage() {
   const [products, setProducts] = useState<Product[]>([]);
   const { category, subcategory } = useParams();
   const [query, setQuery] = useState('');
+  const currentQuery = useRef('');
   const [isEndOfPage, setIsEndOfPage] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const page = useRef(1);
@@ -21,8 +22,9 @@ function ProductsPage() {
   const currentSearchValue = useRef('');
 
   const loadProducts = async () => {
+    setIsEndOfPage(false);
     setIsLoading(true);
-    const filteredProducts = await getFilteredProducts(currentCategory.current, currentSubcategory.current, query, page.current, currentSearchValue.current);
+    const filteredProducts = await getFilteredProducts(currentCategory.current, currentSubcategory.current, currentQuery.current, page.current, currentSearchValue.current);
     if (filteredProducts?.length) {
       setProducts(prevProducts => [...prevProducts, ...filteredProducts]);
       page.current++
@@ -45,6 +47,7 @@ function ProductsPage() {
     currentCategory.current = category;
     currentSubcategory.current = subcategory;
     currentSearchValue.current = searchValue;
+    currentQuery.current = query;
 
     const currentElement = element;
     const currentObserver = observer.current;
@@ -67,9 +70,11 @@ function ProductsPage() {
         changeQuery={setQuery}
         setSearchValue={setSearchValue}
       />
-      {products.length ?
-        <OurProductsCards {...{ products }} /> :
-        <div className={'h-100'}></div>}
+      {products.length > 0 && <OurProductsCards {...{ products }} />}
+      {products.length === 0 && !isLoading &&
+        <div className={'bg-secondaryColor dark:bg-grayMColor flex-1 flex justify-center items-center'}>
+          <p className={'text-center'}>Nothing was found</p>
+        </div>}
       <div ref={setElement}></div>
       {isLoading && !isEndOfPage && <LoadingSpinner />}
     </>

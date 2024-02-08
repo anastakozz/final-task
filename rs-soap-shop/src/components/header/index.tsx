@@ -8,8 +8,8 @@ import CartIconDark from '../../icons/cartIconDark';
 import CartIcon from '../../icons/cartIcon';
 import BurgerMenuButton from '../burgerMenuButton';
 import NavigationModal from '../navigation/navigationModal';
-import { tokenNames } from '../../lib/enums';
-const { userToken } = tokenNames;
+import { TokenNames } from '../../lib/enums';
+const { userToken } = TokenNames;
 
 import { CartContext } from '../../App';
 import ShopLogo from '../../icons/shopLogo';

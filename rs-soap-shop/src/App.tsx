@@ -14,8 +14,8 @@ import Footer from './components/footer';
 import PageNotFound from './pages/pageNotFound';
 import DetailedProductPage from './pages/detailedProductPage';
 import { setAnonymousToken } from './services/registration.service';
-import { tokenNames } from './lib/enums';
-const { userToken, anonymous } = tokenNames;
+import { TokenNames } from './lib/enums';
+const { userToken, anonymous } = TokenNames;
 
 export const CartContext = createContext(null);
 
@@ -31,32 +31,6 @@ const AppLayout = ({ children }: { children: ReactElement }) => {
     </>
   );
 };
-
-// const App = () => {
-//   const [yourValue, setYourValue] = useState('initialValue');
-//
-//   // Функция, которая будет вызвана при изменении значения yourValue
-//   const yourFunction = () => {
-//     console.log('Обновленное значение:', yourValue);
-//     // Ваш код, который нужно выполнить при изменении значения
-//   };
-//
-//   // useEffect срабатывает после каждого рендера компонента
-//   useEffect(() => {
-//     yourFunction();
-//   }, [yourValue]); // Указываем зависимость, при изменении которой нужно вызвать useEffect
-//
-//   // Ваш код компонента...
-//
-//   return (
-//     <div>
-//       {/* Ваш код компонента */}
-//       <button onClick={() => setYourValue('новое значение')}>
-//         Изменить значение
-//       </button>
-//     </div>
-//   );
-// };
 
 function App() {
   const [hasToken, setHasToken] = useState<boolean>(false);

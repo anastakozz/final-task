@@ -67,7 +67,7 @@ export async function findProducts(inputProductName: string) {
 export async function getFiltered(options: string, page = 1) {
   const accessToken = await getTokenFromStorage(true);
   try {
-    const response = await axios.get(`${apiUrl}/${projectKey}/product-projections/search${options}`, {
+    const response = await axios.get(`${apiUrl}/${projectKey}/product-projections${options}`, {
       headers: {
         Authorization: `Bearer ${accessToken}`
       },
@@ -90,16 +90,15 @@ export function getCategoryName(category: string, subcategory: string) {
 }
 
 export async function getFilteredProducts(category: string, subcategory: string, query: string, currentPage: number, inputProductName: string) {
-  console.log('input', inputProductName);
   let filteredProducts: Product[];
   if (inputProductName) {
-    filteredProducts = await getFiltered(`?text.en-us="${inputProductName}"`)
+    filteredProducts = await getFiltered(`?text.en-us="${inputProductName}"`);
   } else if (category || subcategory) {
     const categoryName = getCategoryName(category, subcategory);
     const categoryId = await getCategoryId(categoryName);
-    filteredProducts = await getFiltered(`?filter=categories.id:"${categoryId}"&${query}`, currentPage);
+    filteredProducts = await getFiltered(`/search?filter=categories.id:"${categoryId}"&${query}`, currentPage);
   } else {
-    filteredProducts = await getFiltered(`?${query}"`, currentPage);
+    filteredProducts = await getFiltered(`${query}`, currentPage);
   }
   return filteredProducts;
 }
