@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 export default function ParentCategory({
   onSelectCategory,
   category,
-  option,
+  parentCategoryName,
   setOpenedCategory,
   handleCategoryClick,
   openedCategory
@@ -15,24 +15,24 @@ export default function ParentCategory({
     <div
       className={'flex justify-between px-4 py-2'}
       onClick={() => {
-        onSelectCategory(option);
-        navigate(`/our-products/${option.toLocaleLowerCase()}`);
+        onSelectCategory(parentCategoryName);
+        navigate(`/our-products/${parentCategoryName.toLocaleLowerCase()}`);
       }}
     >
-      <div className={category == option.toLocaleLowerCase() ? 'text-accentColor' : ''}>{option}</div>
+      <div className={category == parentCategoryName.toLocaleLowerCase() ? 'text-accentColor' : ''}>{parentCategoryName}</div>
       <div
         onClick={event => {
           event.stopPropagation();
           handleCategoryClick();
         }}
       >
-        {option === 'Self-care' || option === 'Decor' ? (
+        {!['sale', 'new'].includes(parentCategoryName) && (
           <CategoryDropdownArrow
-            option={option}
+            parentCategoryName={parentCategoryName}
             openedCategory={openedCategory}
             setOpenedCategory={setOpenedCategory}
           />
-        ) : null}
+        )}
       </div>
     </div>
   );

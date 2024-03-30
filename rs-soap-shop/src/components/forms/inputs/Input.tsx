@@ -1,5 +1,4 @@
 import React, { ChangeEventHandler, useEffect, useState } from 'react';
-import cn from 'classnames';
 import { ShowPassword } from '../../../icons/showPassword';
 import { HidePassword } from '../../../icons/hidePassword';
 import { validateEmail } from '../validateFunctions/e-mail';
@@ -23,15 +22,7 @@ export const Input = ({
   isColumn,
   autoComplete
 }: InputProps) => {
-  const inputTailwind =
-    'p-5 font-medium rounded-md w-full border border-slate-300 placeholder:opacity-60 dark:bg-graySColor dark:placeholder-black';
-
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
-
-  const togglePasswordVisibility = (): void => {
-    setIsPasswordVisible(!isPasswordVisible);
-  };
-
   const [value, setValue] = useState(val);
   const [error, setError] = useState('');
 
@@ -114,7 +105,7 @@ export const Input = ({
         <div className='relative'>
           <input
             type={isPasswordVisible ? 'text' : type}
-            className={cn(inputTailwind)}
+            className='p-5 font-medium rounded-md w-full border border-slate-300 placeholder:opacity-60 dark:bg-graySColor dark:placeholder-black'
             placeholder={placeholder}
             value={val}
             onChange={handleInputChange}
@@ -125,7 +116,7 @@ export const Input = ({
           {type === 'password' && (
             <button
               type='button'
-              onClick={togglePasswordVisibility}
+              onClick={() => setIsPasswordVisible(!isPasswordVisible)}
               className='absolute right-4 top-7 focus:outline-none'
             >
               {isPasswordVisible ? <HidePassword /> : <ShowPassword />}

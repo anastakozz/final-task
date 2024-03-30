@@ -36,6 +36,7 @@ export async function getAnonymousToken() {
 
 export const setAnonymousToken = async () => {
   const id = await getAnonymousToken();
+  console.log('ID', id);
   localStorage.setItem(`${anonymous}`, JSON.stringify(id.data));
   localStorage.setItem(`${anonymousRefresh}`, id.data.refresh_token);
 };

@@ -8,10 +8,11 @@ import { NavigationViewProps } from '../../../lib/interfaces';
 import { useParams } from 'react-router-dom';
 import { QueryStringPrefix } from '../../../lib/enums';
 
-export function NavigationView({ nav, changeQuery, setSearchValue }: NavigationViewProps) {
+export function NavigationView({ nav, changeQuery }: NavigationViewProps) {
   const { category, subcategory } = useParams();
   const [filterQuery, setFilterQuery] = useState('');
   const [sortQuery, setSortQuery] = useState('');
+  const [searchValue, setSearchValue] = useState('');
 
   const buildQueryString = (isPriceSorting: boolean): string => {
     if (!filterQuery && !sortQuery) return '';
@@ -32,6 +33,10 @@ export function NavigationView({ nav, changeQuery, setSearchValue }: NavigationV
     }
     return queryString;
   }
+
+  useEffect(() => {
+    searchValue === '' ? changeQuery('') : changeQuery(`/search?text.en="${searchValue}"`);
+  }, [searchValue]);
 
   useEffect(() => {
     const isPriceSorting = sortQuery.includes('price');

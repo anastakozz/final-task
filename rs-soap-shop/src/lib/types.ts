@@ -65,3 +65,8 @@ export type CartActionType = {
   lineItemId: string;
   quantity: number;
 };
+
+export type ValidFieldNames =
+  | 'email'
+  | 'password'
+  | 'confirmPassword'

@@ -1,24 +1,10 @@
 import classNames from 'classnames';
 import SearchButton from '../../../../icons/searchButton';
 import React, { useState } from 'react';
-import { NavigationViewProps } from '../../../../lib/interfaces';
+import { SearchViewProps } from '../../../../lib/interfaces';
 
-export default function SearchView({ setSearchValue }: NavigationViewProps) {
+export default function SearchView({ setSearchValue }: SearchViewProps) {
   const [inputValue, setInputValue] = useState('');
-
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setInputValue(e.target.value);
-  };
-
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'Enter') {
-      setSearchValue(inputValue);
-    }
-  };
-
-  const handleButtonClick = () => {
-    setSearchValue(inputValue);
-  };
 
   return (
     <div className={'flex'}>
@@ -32,8 +18,8 @@ export default function SearchView({ setSearchValue }: NavigationViewProps) {
             'bg-white rounded-md border border-gray-300 shadow-sm hover:bg-gray-50',
             'focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accentDarkColor dark:focus:ring-accentColor'
           )}
-          onChange={handleInputChange}
-          onKeyDown={handleKeyDown}
+          onChange={(e) => setInputValue(e.target.value)}
+          onKeyDown={(e) => e.key === 'Enter' && setSearchValue(inputValue)}
         />
         <div
           className={classNames(
@@ -41,7 +27,7 @@ export default function SearchView({ setSearchValue }: NavigationViewProps) {
             'rounded-md bg-white border-[1px] border-gray-400 shadow-sm',
             'hover:cursor-pointer hover:bg-graySColor active:scale-90'
           )}
-          onClick={handleButtonClick}
+          onClick={() => setSearchValue(inputValue)}
         >
           <SearchButton />
         </div>

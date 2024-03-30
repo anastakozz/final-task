@@ -1,4 +1,4 @@
-import { Radiobuttons } from './components/radiobuttons';
+import { RadioButtons } from './components/radioButtons';
 import { PriceFilter } from './components/PriceFilter';
 import FilterButton from './components/filterButton';
 import { useState, ChangeEvent } from 'react';
@@ -107,7 +107,7 @@ export default function FilterView({ changeQuery }: OurProductsCardsProps) {
           <div className={'text-h5 my-2'}>Filter settings</div>
           <div className={'flex gap-[1rem] flex-wrap md:flex-nowrap'}>
             <div className={'flex flex-col'}>
-              <Radiobuttons />
+              <RadioButtons />
             </div>
             <PriceFilter
               {...{

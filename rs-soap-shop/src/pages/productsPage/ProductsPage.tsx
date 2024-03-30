@@ -18,7 +18,6 @@ function ProductsPage() {
   const [element, setElement] = useState(null);
   const currentCategory = useRef(category);
   const currentSubcategory = useRef(subcategory);
-  const [searchValue, setSearchValue] = useState('');
   const currentSearchValue = useRef('');
 
   const loadProducts = async () => {
@@ -35,7 +34,7 @@ function ProductsPage() {
   useEffect(() => {
     page.current = 1;
     setProducts([]);
-  }, [category, subcategory, query, searchValue]);
+  }, [category, subcategory, query]);
 
   const observer = useRef(new IntersectionObserver((entries) => {
     if (entries[0].isIntersecting) {
@@ -46,7 +45,6 @@ function ProductsPage() {
   useEffect(() => {
     currentCategory.current = category;
     currentSubcategory.current = subcategory;
-    currentSearchValue.current = searchValue;
     currentQuery.current = query;
 
     const currentElement = element;
@@ -60,7 +58,7 @@ function ProductsPage() {
         currentObserver.unobserve(currentElement);
       }
     }
-  }, [element, category, subcategory, query, searchValue]);
+  }, [element, category, subcategory, query]);
 
   return (
     <>
@@ -68,7 +66,6 @@ function ProductsPage() {
       <NavigationView
         nav={{ category, subcategory }}
         changeQuery={setQuery}
-        setSearchValue={setSearchValue}
       />
       {products.length > 0 && <OurProductsCards {...{ products }} />}
       {products.length === 0 && !isLoading &&

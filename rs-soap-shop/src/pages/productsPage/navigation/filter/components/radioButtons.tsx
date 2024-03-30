@@ -1,4 +1,4 @@
-export function Radiobuttons() {
+export function RadioButtons() {
   return (
     <form className={'whitespace-nowrap'} action=''>
       <div className=' pb-1 flex content-center'>

@@ -2,27 +2,15 @@ import { CategoryDropdownArrowProps } from '../lib/interfaces';
 import React, { useEffect, useState } from 'react';
 
 export default function CategoryDropdownArrow({
-  option,
+  parentCategoryName,
   openedCategory,
   setOpenedCategory
 }: CategoryDropdownArrowProps) {
   const [rotationAngle, setRotationAngle] = useState<string>('-90');
 
   useEffect(() => {
-    if (option === openedCategory) {
-      setRotationAngle('90');
-    } else {
-      setRotationAngle('-90');
-    }
-  }, [openedCategory, option]);
-
-  const handleCategoryClick = () => {
-    if (option === openedCategory) {
-      setOpenedCategory(null);
-    } else {
-      setOpenedCategory(option);
-    }
-  };
+    parentCategoryName === openedCategory ? setRotationAngle('90') : setRotationAngle('-90');
+  }, [openedCategory, parentCategoryName]);
 
   return (
     <svg
@@ -32,7 +20,7 @@ export default function CategoryDropdownArrow({
       fill='none'
       xmlns='http://www.w3.org/2000/svg'
       style={{ transition: 'transform 0.3s ease', transform: `rotate(${rotationAngle}deg)` }}
-      onClick={handleCategoryClick}
+      onClick={() => parentCategoryName === openedCategory ? setOpenedCategory(null) : setOpenedCategory(parentCategoryName)}
     >
       <g id='SVGRepo_blackgCarrier' strokeWidth='0'></g>
       <g id='SVGRepo_tracerCarrier' strokeLinecap='round' strokeLinejoin='round'></g>
