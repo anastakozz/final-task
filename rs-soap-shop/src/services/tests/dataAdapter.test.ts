@@ -1,5 +1,5 @@
 import { dataAdapter } from '../handleRegistration';
-import { RegistrationData } from '../../lib/interfaces';
+import { RegistrationData } from '@interfaces';
 
 const data: RegistrationData = {
   firstName: 'A',

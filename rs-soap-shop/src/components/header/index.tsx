@@ -4,16 +4,15 @@ import { NavLink } from 'react-router-dom';
 import { DarkModeButton } from '../darkModeButton';
 import LoginArea from '../loginArea/loginAreaDesctop';
 import Navigation from '../navigation/navigationLight';
-import CartIconDark from '../../icons/cartIconDark';
-import CartIcon from '../../icons/cartIcon';
+import CartIconDark from '@icons/cartIconDark';
+import CartIcon from '@icons/cartIcon';
 import BurgerMenuButton from '../burgerMenuButton';
 import NavigationModal from '../navigation/navigationModal';
-import { TokenNames } from '../../lib/enums';
+import { TokenNames } from '@enums';
 const { userToken } = TokenNames;
-
-import { CartContext } from '../../App';
-import ShopLogo from '../../icons/shopLogo';
-import { getCart } from '../../services/handleCart';
+import { CartContext } from '@App';
+import ShopLogo from '@icons/shopLogo';
+import { getCart } from '@services/handleCart';
 
 function Header() {
   const [cart, setCart] = useContext(CartContext);

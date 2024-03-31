@@ -1,5 +1,5 @@
 import React from 'react';
-import { ButtonProps } from '../../../lib/interfaces';
+import { ButtonProps } from '@interfaces';
 
 export default function AdditionalButton({ type, children, onClick, notFixedWidth }: ButtonProps): JSX.Element {
   return (

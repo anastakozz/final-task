@@ -1,9 +1,9 @@
-import { apiUrl, projectKey } from '../lib/constants';
+import { apiUrl, projectKey } from '@constants';
 import { getBasicToken } from './registration.service';
 import axios from 'axios';
-import { CardsPerPage } from '../lib/enums';
-import { getTokenFromStorage } from '../lib/utils/getLocalStorageToken';
-import { Product } from '../lib/interfaces';
+import { CardsPerPage } from '@enums';
+import { getTokenFromStorage } from '@utils/getLocalStorageToken';
+import { Product } from '@interfaces';
 import { getCategoryId } from './category.service';
 
 export async function getProductsList(isCatalogCalling?: boolean, page = 1) {

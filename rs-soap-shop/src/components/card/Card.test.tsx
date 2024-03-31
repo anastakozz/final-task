@@ -1,8 +1,8 @@
-import { ProductCardProps } from '../../lib/interfaces';
+import { ProductCardProps } from '@interfaces';
 import Card from './Card';
 import { render, fireEvent, screen, act } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
-import { CartContext } from '../../App';
+import { CartContext } from '@App';
 
 const mockedUsedNavigate = jest.fn();
 

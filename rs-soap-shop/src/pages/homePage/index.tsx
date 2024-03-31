@@ -4,7 +4,7 @@ import CheckoutSection from './checkoutSection';
 import SaleSection from './saleSection';
 import Promocode from './Promocode';
 import RandomCardsSection from './randomCardsSection/RandomCardsSection';
-import scrollToTop from '../../lib/utils/scrollToTop';
+import scrollToTop from '@utils/scrollToTop';
 
 function HomePage() {
   useEffect(() => {

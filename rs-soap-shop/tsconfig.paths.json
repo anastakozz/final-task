@@ -1,0 +1,17 @@
+{
+    "compilerOptions": {
+      "baseUrl": ".",
+      "paths": {
+        "@App": ["src/App"],
+        "@services/*": ["src/services/*"],
+        "@interfaces": ["src/lib/interfaces"],
+        "@enums": ["src/lib/enums"],
+        "@constants": ["src/lib/constants"],
+        "@types": ["src/lib/types"],
+        "@utils/*": ["src/lib/utils/*"],
+        "@components/*": ["src/components/*"],
+        "@pages/*": ["src/pages/*"],
+        "@icons/*": ["src/icons/*"]
+      }
+    }
+  }

@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import HeavyButton from '../../components/buttons/heavyButton';
+import HeavyButton from '@components/buttons/heavyButton';
 
 export function EmptyCart() {
   const navigate = useNavigate();

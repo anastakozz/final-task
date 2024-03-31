@@ -1,6 +1,6 @@
 import axios, { AxiosError } from 'axios';
-import { apiUrl, projectKey } from '../lib/constants';
-import { CartActionType } from '../lib/types';
+import { apiUrl, projectKey } from '@constants';
+import { CartActionType } from '@types';
 
 export async function getActiveCart(token: string) {
   try {

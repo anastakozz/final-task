@@ -1,5 +1,5 @@
-import { introspectToken, refreshToken, setAnonymousToken } from '../../services/registration.service';
-import { TokenNames } from '../enums';
+import { introspectToken, refreshToken, setAnonymousToken } from '@services/registration.service';
+import { TokenNames } from '@enums';
 const { userToken, anonymous } = TokenNames;
 
 async function setRefreshedToken(storageKey: string) {

@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { CategoryCardProps } from '../../../../../lib/interfaces';
+import { CategoryCardProps } from '@interfaces';
 import classNames from 'classnames';
 
 export default function CategoryCard(item: CategoryCardProps) {

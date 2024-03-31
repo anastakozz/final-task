@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react';
-import scrollToTop from '../../lib/utils/scrollToTop';
-import BannerPageName from '../../components/bannerPageName';
-import MarkIcon from '../../icons/markIcon';
+import scrollToTop from '@utils/scrollToTop';
+import BannerPageName from '@components/bannerPageName';
+import MarkIcon from '@icons/markIcon';
 import classNames from 'classnames';
-import { ABOUT_US } from '../../lib/constants';
-import GitHubIcon from '../../icons/gitHubIcon';
-import RSSLogoIcon from '../../icons/RSSLogoIcon';
+import { ABOUT_US } from '@constants';
+import GitHubIcon from '@icons/gitHubIcon';
+import RSSLogoIcon from '@icons/RSSLogoIcon';
 
 export function AboutPage() {
   useEffect(() => {

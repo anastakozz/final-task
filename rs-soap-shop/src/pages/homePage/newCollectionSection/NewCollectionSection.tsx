@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import Banner from '../../../components/banner';
+import Banner from '@components/banner';
 
 export default function NewCollectionSection() {
   return (

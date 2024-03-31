@@ -1,8 +1,8 @@
 import { NavLink, useNavigate } from 'react-router-dom';
-import { TokenNames } from '../../../lib/enums';
-import { setAnonymousToken } from '../../../services/registration.service';
+import { TokenNames } from '@enums';
+import { setAnonymousToken } from '@services/registration.service';
 const { userToken, anonymous } = TokenNames;
-import { getSpecificCart } from '../../../services/handleCart';
+import { getSpecificCart } from '@services/handleCart';
 
 function LoginAreaModal({
   isLoggedIn,

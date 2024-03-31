@@ -1,4 +1,4 @@
-import { ResultProps } from '../../lib/interfaces';
+import { ResultProps } from '@interfaces';
 import SuccessMessage from './successMessage.tsx';
 import ErrorMessage from './errorMessage.tsx';
 

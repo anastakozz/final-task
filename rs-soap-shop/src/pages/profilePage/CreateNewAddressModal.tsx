@@ -1,13 +1,13 @@
 import { useState } from 'react';
-import AdditionalButton from '../../components/buttons/additionalButton';
-import { cityValidation, postalCodeValidation, streetValidation } from '../../lib/utils/inputValidations';
-import { Input } from '../../components/forms/inputs/Input';
-import { updateAccountData } from '../../services/account.service';
-import { AddressCardI } from '../../lib/interfaces';
+import AdditionalButton from '@components/buttons/additionalButton';
+import { cityValidation, postalCodeValidation, streetValidation } from '@utils/inputValidations';
+import { Input } from '@components/forms/inputs/Input';
+import { updateAccountData } from '@services/account.service';
+import { AddressCardI } from '@interfaces';
 import { dataAdapterToFullName } from '.';
-import { validateCity } from '../../components/forms/validateFunctions/city';
-import { validateStreet } from '../../components/forms/validateFunctions/street';
-import { validatePostalCode } from '../../components/forms/validateFunctions/postalCode';
+import { validateCity } from '@components/forms/validateFunctions/city';
+import { validateStreet } from '@components/forms/validateFunctions/street';
+import { validatePostalCode } from '@components/forms/validateFunctions/postalCode';
 
 const countries = [
   {

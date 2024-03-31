@@ -1,5 +1,5 @@
-import { ICart, Product, ProductCardProps } from '../../../lib/interfaces';
-import { getProductsInCart } from '../../../services/handleCart';
+import { ICart, Product, ProductCardProps } from '@interfaces';
+import { getProductsInCart } from '@services/handleCart';
 import toCardAdapter from '../../../lib/utils/productDataAdapters.ts/toCardAdapter';
 
 export async function adaptCardsData(data: Product[], cart: ICart): Promise<ProductCardProps[]> {

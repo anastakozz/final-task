@@ -1,4 +1,4 @@
-import { PageNameProp } from '../../lib/interfaces';
+import { PageNameProp } from '@interfaces';
 
 function BannerPageName({ children }: PageNameProp): JSX.Element {
   return (

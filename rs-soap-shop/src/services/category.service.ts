@@ -1,6 +1,6 @@
 import axios from 'axios';
-import { apiUrl, projectKey } from '../lib/constants';
-import { getTokenFromStorage } from '../lib/utils/getLocalStorageToken';
+import { apiUrl, projectKey } from '@constants';
+import { getTokenFromStorage } from '@utils/getLocalStorageToken';
 
 export async function getCategoryId(key: string) {
   const accessToken = await getTokenFromStorage(true);

@@ -1,14 +1,14 @@
 import React, { useContext, useEffect, useState } from 'react';
-import scrollToTop from '../../lib/utils/scrollToTop';
-import BannerPageName from '../../components/bannerPageName';
-import { getTokenFromStorage } from '../../lib/utils/getLocalStorageToken';
-import { getCartWithPromoCode, removeDiscountCode } from '../../services/cart.service';
-import { Product } from '../../lib/interfaces';
-import AdditionalButton from '../../components/buttons/additionalButton';
+import scrollToTop from '@utils/scrollToTop';
+import BannerPageName from '@components/bannerPageName';
+import { getTokenFromStorage } from '@utils/getLocalStorageToken';
+import { getCartWithPromoCode, removeDiscountCode } from '@services/cart.service';
+import { Product } from '@interfaces';
+import AdditionalButton from '@components/buttons/additionalButton';
 import { CartListItem } from './CartListItem';
 import { EmptyCart } from './EmptyCart';
-import { CartContext } from '../../App';
-import { clearCart, getCart } from '../../services/handleCart';
+import { CartContext } from '@App';
+import { clearCart, getCart } from '@services/handleCart';
 import { Spinner } from '@material-tailwind/react';
 import classNames from 'classnames';
 

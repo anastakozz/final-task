@@ -1,22 +1,22 @@
 import React, { useEffect, useState } from 'react';
-import { getAccountData, updateAccountData } from '../../services/account.service';
-import { AddressCardI } from '../../lib/interfaces';
-import EmptyButton from '../../components/buttons/emptyButton';
-import BannerPageName from '../../components/bannerPageName';
-import AddressCard from '../../components/addressCard';
-import EditIcon from '../../icons/editIcon';
-import AdditionalButton from '../../components/buttons/additionalButton';
-import { Input } from '../../components/forms/inputs/Input';
-import { dateValidation, emailValidation, nameValidation } from '../../lib/utils/inputValidations';
-import SuccessMessage from '../../components/ResultMessage/successMessage.tsx';
-import ErrorMessage from '../../components/ResultMessage/errorMessage.tsx';
+import { getAccountData, updateAccountData } from '@services/account.service';
+import { AddressCardI } from '@interfaces';
+import EmptyButton from '@components/buttons/emptyButton';
+import BannerPageName from '@components/bannerPageName';
+import AddressCard from '@components/addressCard';
+import EditIcon from '@icons/editIcon';
+import AdditionalButton from '@components/buttons/additionalButton';
+import { Input } from '@components/forms/inputs/Input';
+import { dateValidation, emailValidation, nameValidation } from '@utils/inputValidations';
+import SuccessMessage from '@components/ResultMessage/successMessage.tsx';
+import ErrorMessage from '@components/ResultMessage/errorMessage.tsx';
 import ChangePasswordModal from './ChangePasswordModal';
 import CreateNewAddressModal from './CreateNewAddressModal';
-import scrollToTop from '../../lib/utils/scrollToTop';
+import scrollToTop from '@utils/scrollToTop';
 import { useNavigate } from 'react-router-dom';
-import { validateEmail } from '../../components/forms/validateFunctions/e-mail';
-import { validateDate } from '../../components/forms/validateFunctions/date';
-import { validateName } from '../../components/forms/validateFunctions/name';
+import { validateEmail } from '@components/forms/validateFunctions/e-mail';
+import { validateDate } from '@components/forms/validateFunctions/date';
+import { validateName } from '@components/forms/validateFunctions/name';
 
 const countries = [
   {

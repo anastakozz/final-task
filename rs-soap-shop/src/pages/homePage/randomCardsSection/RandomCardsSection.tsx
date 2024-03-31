@@ -1,13 +1,13 @@
 import { Link } from 'react-router-dom';
-import EmptyButton from '../../../components/buttons/emptyButton';
-import Card from '../../../components/card';
+import EmptyButton from '@components/buttons/emptyButton';
+import Card from '@components/card';
 import { ReactNode, useContext, useEffect, useState } from 'react';
 import shuffleProducts from '../../../lib/utils/shuffleCards';
-import { ICart, Product, ProductCardProps } from '../../../lib/interfaces';
-import { getProductsList } from '../../../services/product.service';
+import { ICart, Product, ProductCardProps } from '@interfaces';
+import { getProductsList } from '@services/product.service';
 import toCardAdapter from '../../../lib/utils/productDataAdapters.ts/toCardAdapter';
-import { CartContext } from '../../../App';
-import { ProductListItem } from '../../../lib/types';
+import { CartContext } from '@App';
+import { ProductListItem } from '@types';
 
 async function getRandomCardsData(cart: ICart): Promise<ProductCardProps[]> {
   const cartProducts = cart?.lineItems.map((a: ProductListItem) => a.productId);

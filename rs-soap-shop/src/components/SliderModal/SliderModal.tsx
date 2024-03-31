@@ -1,6 +1,6 @@
 import CarouselDefault from '../carousel';
 import { useEffect } from 'react';
-import scrollToTop from '../../lib/utils/scrollToTop';
+import scrollToTop from '@utils/scrollToTop';
 import classNames from 'classnames';
 
 export default function SliderModal(modal: { paths: string[] }) {

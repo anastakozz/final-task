@@ -1,4 +1,4 @@
-import { Product, DetailsProps } from '../../interfaces';
+import { Product, DetailsProps } from '@interfaces';
 
 export default function toDetailsAdapter(data: Product): DetailsProps {
   const variant = data.masterVariant;

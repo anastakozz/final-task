@@ -1,8 +1,8 @@
 import React, { ChangeEventHandler, useEffect, useState } from 'react';
-import { ShowPassword } from '../../../icons/showPassword';
-import { HidePassword } from '../../../icons/hidePassword';
+import { ShowPassword } from '@icons/showPassword';
+import { HidePassword } from '@icons/hidePassword';
 import { validateEmail } from '../validateFunctions/e-mail';
-import { InputProps } from '../../../lib/interfaces';
+import { InputProps } from '@interfaces';
 import { validatePassword } from '../validateFunctions/password';
 import { validateDate } from '../validateFunctions/date';
 import { validateStreet } from '../validateFunctions/street';

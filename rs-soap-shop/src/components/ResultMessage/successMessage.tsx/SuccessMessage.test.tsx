@@ -1,7 +1,7 @@
 import { fireEvent, render } from '@testing-library/react';
 import ResultMessage from '../ResultMessage';
 import SuccessMessage from './SuccessMessage';
-import { ResultProps } from '../../../lib/interfaces';
+import { ResultProps } from '@interfaces';
 
 const mockedUsedNavigate = jest.fn();
 

@@ -1,6 +1,6 @@
 import HeavyButton from '../buttons/heavyButton';
 import { Link } from 'react-router-dom';
-import { BannerProps } from '../../lib/interfaces';
+import { BannerProps } from '@interfaces';
 import classNames from 'classnames';
 
 export function Banner(content: BannerProps) {

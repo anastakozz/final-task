@@ -4,9 +4,9 @@ import FilterView from './filter/filterView';
 import SearchView from './search/searchView';
 import Breadcrumb from '../../../components/BasicBreadcrumbs';
 import React, { useEffect, useState } from 'react';
-import { NavigationViewProps } from '../../../lib/interfaces';
+import { NavigationViewProps } from '@interfaces';
 import { useParams } from 'react-router-dom';
-import { QueryStringPrefix } from '../../../lib/enums';
+import { QueryStringPrefix } from '@enums';
 
 export function NavigationView({ nav, changeQuery }: NavigationViewProps) {
   const { category, subcategory } = useParams();

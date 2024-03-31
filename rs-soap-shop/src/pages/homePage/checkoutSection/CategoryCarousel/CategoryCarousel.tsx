@@ -1,6 +1,6 @@
 import React, { useState, ReactNode } from 'react';
-import ArrowIcon from '../../../../icons/arrowIcon';
-import { CategoryCardProps } from '../../../../lib/interfaces';
+import ArrowIcon from '@icons/arrowIcon';
+import { CategoryCardProps } from '@interfaces';
 import CategoryCard from './CategoryCard';
 
 const items: CategoryCardProps[] = [

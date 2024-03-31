@@ -1,10 +1,10 @@
 import { useState } from 'react';
-import { Input } from '../../components/forms/inputs/Input';
-import { passwordValidation } from '../../lib/utils/inputValidations';
-import AdditionalButton from '../../components/buttons/additionalButton';
-import { changePassword } from '../../services/account.service';
-import { handleRelogin } from '../../services/handleLogin';
-import { validatePassword } from '../../components/forms/validateFunctions/password';
+import { Input } from '@components/forms/inputs/Input';
+import { passwordValidation } from '@utils/inputValidations';
+import AdditionalButton from '@components/buttons/additionalButton';
+import { changePassword } from '@services/account.service';
+import { handleRelogin } from '@services/handleLogin';
+import { validatePassword } from '@components/forms/validateFunctions/password';
 
 type ChangePasswordModalProps = {
   email: string;

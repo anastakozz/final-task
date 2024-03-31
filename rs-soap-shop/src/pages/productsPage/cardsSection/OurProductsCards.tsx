@@ -1,8 +1,8 @@
 import React, { ReactNode, useContext, useEffect, useState } from 'react';
 import Card from '../../../components/card';
-import { OurProductsCardsProps, ProductCardProps } from '../../../lib/interfaces';
+import { OurProductsCardsProps, ProductCardProps } from '@interfaces';
 import { adaptCardsData } from './getDataForCards';
-import { CartContext } from '../../../App';
+import { CartContext } from '@App';
 
 export default function OurProductsCards({ products }: OurProductsCardsProps) {
   const [items, setItems] = useState<ProductCardProps[] | undefined>(undefined);

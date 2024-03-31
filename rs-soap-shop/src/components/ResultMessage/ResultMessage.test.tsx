@@ -1,5 +1,5 @@
 import { render, screen } from '@testing-library/react';
-import { ResultProps } from '../../lib/interfaces';
+import { ResultProps } from '@interfaces';
 import ResultMessage from './ResultMessage';
 
 const propsDataTrue: ResultProps = {

@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import SearchButton from '../../../../icons/searchButton';
 import React, { useState } from 'react';
-import { SearchViewProps } from '../../../../lib/interfaces';
+import { SearchViewProps } from '@interfaces';
 
 export default function SearchView({ setSearchValue }: SearchViewProps) {
   const [inputValue, setInputValue] = useState('');

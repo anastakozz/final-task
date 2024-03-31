@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import scrollToTop from '../../lib/utils/scrollToTop';
-import { TokenNames } from '../../lib/enums';
-import { ControlledInput } from '../../components/forms/newFormComponents/ControlledInput';
+import { TokenNames } from '@enums';
+import { ControlledInput } from '@components/forms/newFormComponents/ControlledInput';
 import ButtonForm from '../../components/forms/buttonForm';
 import { useForm } from 'react-hook-form';
-import { ILoginResolver } from '../../lib/interfaces';
+import { ILoginResolver } from '@interfaces';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { loginSchema } from '../../lib/utils/validationSchema';
+import { loginSchema } from '@utils/validationSchema';
 import { defaultInputsValues } from '../../lib/validationLib';
-import { getToken, login } from '../../services/login.service';
+import { getToken, login } from '@services/login.service';
 
 const { userToken, userTokenRefresh } = TokenNames;
 

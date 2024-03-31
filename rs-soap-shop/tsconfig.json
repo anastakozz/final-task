@@ -24,7 +24,6 @@
     "pretty": true,
     "removeComments": true,
     "strictNullChecks": false,
-    // "noUnusedLocals": true,
     "noUnusedParameters": true,
     "types": ["node"]
   },
@@ -36,5 +35,6 @@
     "node_modules",
     "**/__tests__/*",
     "**/__mocks__/*"
-  ]
+  ],
+  "extends": "./tsconfig.paths.json"
 }

@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { apiUrl, authUrl, projectKey, clientId, secret } from '../lib/constants';
+import { apiUrl, authUrl, projectKey, clientId, secret } from '@constants';
 import { getSpecificCart } from './handleCart';
 import { TokenNames } from '../lib/enums';
 const { userToken, anonymous, anonymousRefresh } = TokenNames;

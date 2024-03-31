@@ -1,6 +1,6 @@
 import axios from 'axios';
-import { apiUrl, projectKey } from '../lib/constants';
-import { IAction } from '../lib/interfaces';
+import { apiUrl, projectKey } from '@constants';
+import { IAction } from '@interfaces';
 
 export function getAccountData() {
   try {

@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import { ButtonProps } from '../../../lib/interfaces';
+import { ButtonProps } from '@interfaces';
 
 export default function EmptyButton({ children, onClick }: ButtonProps): JSX.Element {
   return (

@@ -1,4 +1,4 @@
-import { Product, ProductCardProps } from '../../interfaces';
+import { Product, ProductCardProps } from '@interfaces';
 
 export default function toCardAdapter(data: Product, isInCart?: boolean): ProductCardProps {
   const variant = data.masterVariant;

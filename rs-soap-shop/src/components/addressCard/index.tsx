@@ -1,8 +1,8 @@
 import classNames from 'classnames';
-import DeleteIcon from '../../icons/deleteIcon';
-import EditIcon from '../../icons/editIcon';
-import { AddressCardI } from '../../lib/interfaces';
-import { dataAdapterToFullName } from '../../pages/profilePage';
+import DeleteIcon from '@icons/deleteIcon';
+import EditIcon from '@icons/editIcon';
+import { AddressCardI } from '@interfaces';
+import { dataAdapterToFullName } from '@pages/profilePage';
 
 type AddressCardProps = {
   onDelete: () => void;

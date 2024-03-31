@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import scrollToTop from '../../lib/utils/scrollToTop';
-import { TokenNames } from '../../lib/enums';
-import { ControlledInput } from '../../components/forms/newFormComponents/ControlledInput';
+import { TokenNames } from '@enums';
+import { ControlledInput } from '@components/forms/newFormComponents/ControlledInput';
 import Address from '../../components/forms/newFormComponents/Address';
 import { Controller, useForm } from 'react-hook-form';
 import ResultMessage from '../../components/ResultMessage';
 import ButtonForm from '../../components/forms/buttonForm';
-import { ILoginResolver, RegistrationData, ResultProps } from '../../lib/interfaces';
+import { ILoginResolver, RegistrationData, ResultProps } from '@interfaces';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { registrationSchema, withoutShippingSchema } from '../../lib/utils/validationSchema';
+import { registrationSchema, withoutShippingSchema } from '@utils/validationSchema';
 import { defaultInputsValues } from '../../lib/validationLib';
-import { handleRegistration } from '../../services/handleRegistration';
+import { handleRegistration } from '@services/handleRegistration';
 
 function SignUpPage() {
   const navigate = useNavigate();

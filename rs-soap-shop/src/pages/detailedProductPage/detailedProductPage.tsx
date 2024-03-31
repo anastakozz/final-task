@@ -1,16 +1,16 @@
 import { useParams } from 'react-router-dom';
-import { getProductByKey } from '../../services/product.service';
+import { getProductByKey } from '@services/product.service';
 import React, { useContext, useEffect, useState } from 'react';
-import { DetailsProps, ResultProps } from '../../lib/interfaces';
-import CarouselDefault from '../../components/carousel';
-import toDetailsAdapter from '../../lib/utils/productDataAdapters.ts/toDetailsAdapter';
-import SliderModal from '../../components/SliderModal';
-import scrollToTop from '../../lib/utils/scrollToTop';
+import { DetailsProps, ResultProps } from '@interfaces';
+import CarouselDefault from '@components/carousel';
+import toDetailsAdapter from '@utils/productDataAdapters.ts/toDetailsAdapter';
+import SliderModal from '@components/SliderModal';
+import scrollToTop from '@utils/scrollToTop';
 import AddButton from './addButton';
 import RemoveButton from './removeButton';
-import { sendToCart, getProductsInCart, removeFromCart } from '../../services/handleCart';
-import ResultMessage from '../../components/ResultMessage';
-import { CartContext } from '../../App';
+import { sendToCart, getProductsInCart, removeFromCart } from '@services/handleCart';
+import ResultMessage from '@components/ResultMessage';
+import { CartContext } from '@App';
 
 function DetailedProductPage() {
   const [submitResult, setSubmitResult] = useState<ResultProps>({

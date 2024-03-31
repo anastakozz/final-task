@@ -1,9 +1,9 @@
-import { OurProductsCardsProps } from '../../../../lib/interfaces';
-import { iconClassesNormal } from '../../../../lib/constants';
-import { SortABC } from '../../../../icons/sortABC';
-import { SortZYX } from '../../../../icons/sortZYX';
-import { SortPriceDown } from '../../../../icons/sortPriceDown';
-import { SortPriceUp } from '../../../../icons/sortPriceUp';
+import { OurProductsCardsProps } from '@interfaces';
+import { iconClassesNormal } from '@constants';
+import { SortABC } from '@icons/sortABC';
+import { SortZYX } from '@icons/sortZYX';
+import { SortPriceDown } from '@icons/sortPriceDown';
+import { SortPriceUp } from '@icons/sortPriceUp';
 import { useState } from 'react';
 
 export default function SortingView({ changeQuery }: OurProductsCardsProps) {

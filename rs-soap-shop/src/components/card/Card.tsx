@@ -1,9 +1,9 @@
-import { ProductCardProps } from '../../lib/interfaces';
+import { ProductCardProps } from '@interfaces';
 import { useNavigate } from 'react-router-dom';
 import { MouseEvent, useContext, useState } from 'react';
-import { sendToCart } from '../../services/handleCart';
+import { sendToCart } from '@services/handleCart';
 import SendButton from './SendButton';
-import { CartContext } from '../../App';
+import { CartContext } from '@App';
 import classNames from 'classnames';
 
 export default function Card(item: ProductCardProps) {
@@ -27,7 +27,6 @@ export default function Card(item: ProductCardProps) {
         }
       } catch (err) {
         console.log(err);
-        setIsSending(false);
       } finally {
         setIsInCart(true);
         setIsSending(false);

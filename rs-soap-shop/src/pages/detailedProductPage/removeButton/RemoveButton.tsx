@@ -1,5 +1,5 @@
-import { RemoveMessage } from '../../../lib/enums';
-import { classesActive, classesDisabled } from '../../../lib/constants';
+import { RemoveMessage } from '@enums';
+import { classesActive, classesDisabled } from '@constants';
 
 export interface RemoveButtonProps {
   isInCart: boolean;

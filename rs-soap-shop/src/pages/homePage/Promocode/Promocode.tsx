@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
-import SaleIcon from '../../../icons/saleIcon';
-import ArrowSmallIcon from '../../../icons/arrowSmallIcon';
+import SaleIcon from '@icons/saleIcon';
+import ArrowSmallIcon from '@icons/arrowSmallIcon';
 import classNames from 'classnames';
 
 export default function Promocode() {

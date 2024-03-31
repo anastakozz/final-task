@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
-import HeavyButton from '../../components/buttons/heavyButton';
+import HeavyButton from '@components/buttons/heavyButton';
 import { useNavigate } from 'react-router-dom';
 import { TypeAnimation } from 'react-type-animation';
-import NavigationDark from '../../components/navigation/navigationDark';
-import scrollToTop from '../../lib/utils/scrollToTop';
+import NavigationDark from '@components/navigation/navigationDark';
+import scrollToTop from '@utils/scrollToTop';
 
 function PageNotFound() {
   useEffect(() => {

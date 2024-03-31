@@ -3,8 +3,8 @@ import { NavigationView } from './navigation/navigationView';
 import { useEffect, useRef, useState } from 'react';
 import BannerPageName from '../../components/bannerPageName';
 import { useParams } from 'react-router-dom';
-import { getFilteredProducts } from '../../services/product.service';
-import { Product } from '../../lib/interfaces';
+import { getFilteredProducts } from '@services/product.service';
+import { Product } from '@interfaces';
 import LoadingSpinner from '../../components/loading/loading';
 
 function ProductsPage() {

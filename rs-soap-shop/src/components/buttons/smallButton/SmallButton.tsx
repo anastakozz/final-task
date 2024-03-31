@@ -1,5 +1,5 @@
 import React from 'react';
-import { ButtonProps } from '../../../lib/interfaces';
+import { ButtonProps } from '@interfaces';
 import classNames from 'classnames';
 
 export default function SmallButton({ children, onClick }: ButtonProps): JSX.Element {

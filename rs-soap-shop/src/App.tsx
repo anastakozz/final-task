@@ -1,7 +1,6 @@
 import React, { ReactElement, useEffect, useState, createContext } from 'react';
-
 import './App.css';
-import Header from './components/header';
+import Header from '@components/header';
 import { Route, Routes } from 'react-router-dom';
 import HomePage from './pages/homePage';
 import ProductsPage from './pages/productsPage';
@@ -13,12 +12,10 @@ import ProfilePage from './pages/profilePage';
 import Footer from './components/footer';
 import PageNotFound from './pages/pageNotFound';
 import DetailedProductPage from './pages/detailedProductPage';
-import { setAnonymousToken } from './services/registration.service';
-import { TokenNames } from './lib/enums';
+import { setAnonymousToken } from '@services/registration.service';
+import { TokenNames } from '@enums';
 const { userToken, anonymous } = TokenNames;
-
 export const CartContext = createContext(null);
-
 const AppLayout = ({ children }: { children: ReactElement }) => {
   const [cart, setCart] = useState(null);
   return (

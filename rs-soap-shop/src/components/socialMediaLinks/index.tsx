@@ -1,9 +1,9 @@
-import VkIcon from '../../icons/vkIcon';
-import VkIconDark from '../../icons/vkIconDark';
-import InstagramIcon from '../../icons/instagramIcon';
-import InstagramIconDark from '../../icons/instagramIconDark';
-import FacebookIcon from '../../icons/facebookIcon';
-import FacebookIconDark from '../../icons/facebookIconDark';
+import VkIcon from '@icons/vkIcon';
+import VkIconDark from '@icons/vkIconDark';
+import InstagramIcon from '@icons/instagramIcon';
+import InstagramIconDark from '@icons/instagramIconDark';
+import FacebookIcon from '@icons/facebookIcon';
+import FacebookIconDark from '@icons/facebookIconDark';
 
 function SocialMediaLinks() {
   return (

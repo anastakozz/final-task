@@ -1,5 +1,5 @@
-import { CardMessage } from '../../../lib/enums';
-import SmallButton, { smallButtonClassesInactive } from '../../buttons/smallButton/SmallButton';
+import { CardMessage } from '@enums';
+import SmallButton, { smallButtonClassesInactive } from '@components/buttons/smallButton/SmallButton';
 
 interface SendButtonProps {
   isInCart: boolean;

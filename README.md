@@ -1,7 +1,15 @@
 # Soap Shop RSS 2023
 
 The project implements the final task in Rolling Scopes School Frontend Course.
-The Team is: SayYEsToJS RSS2023.
+
+The Team is SayYesToJS RSS2023 that includes:
+- [Anastasiya Kozlova](https://github.com/anastakozz)
+- [Julia Kuzich](https://github.com/yulyakuzich)
+- [Vyacheslav Ryshkov](https://github.com/SlaVR7)
+
+The purpose of the project was to create an up-to-date e-commerce SPA fulfilling all technical requirements of RS School. Task description may be found [here](https://github.com/rolling-scopes-school/tasks/tree/master/tasks/eCommerce-Application)
+
+Final deployment is kept [here](https://soap-nature.vercel.app/)
 
 Technology Stack:
 - [x] CommerceTools
@@ -12,6 +20,7 @@ Technology Stack:
 - [x] GitHub
 - [x] Eslint, Prettier
 - [x] Material Tailwind library
+- [x] Vercel automatic deployment
 
 ## Local Installation
 

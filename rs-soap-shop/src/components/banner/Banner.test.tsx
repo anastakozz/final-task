@@ -1,6 +1,6 @@
 import { render } from '@testing-library/react';
 import { Banner } from './Banner';
-import { BannerProps } from '../../lib/interfaces';
+import { BannerProps } from '@interfaces';
 import { BrowserRouter } from 'react-router-dom';
 
 const propsData: BannerProps = {

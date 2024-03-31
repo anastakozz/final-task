@@ -1,6 +1,6 @@
 import { render } from '@testing-library/react';
 import AboutPage from './index';
-import { ABOUT_US } from '../../lib/constants';
+import { ABOUT_US } from '@constants';
 
 describe('AboutPage Component', () => {
   it('renders without errors', () => {

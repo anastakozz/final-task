@@ -1,5 +1,5 @@
-import { classesActive, classesDisabled } from '../../../lib/constants';
-import { CardMessage } from '../../../lib/enums';
+import { classesActive, classesDisabled } from '@constants';
+import { CardMessage } from '@enums';
 
 export interface AddButtonProps {
   isInCart: boolean;

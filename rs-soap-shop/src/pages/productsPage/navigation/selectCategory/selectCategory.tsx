@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { DropdownIcon } from '../../../../icons/dropdownIcon';
+import { DropdownIcon } from '@icons/dropdownIcon';
 import classNames from 'classnames';
-import { getCategories } from '../../../../services/category.service';
+import { getCategories } from '@services/category.service';
 import SubCategory from './dropdownMenu';
 import ParentCategory from './parentCategory';
-import { NavigationViewProps, Product } from '../../../../lib/interfaces';
+import { NavigationViewProps, Product } from '@interfaces';
 
 export const SelectCategory = ({ nav }: NavigationViewProps) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -12,13 +12,12 @@ export const SelectCategory = ({ nav }: NavigationViewProps) => {
   const [isDropdownOpened, setIsDropdownOpened] = useState(false);
   const [openedCategory, setOpenedCategory] = useState('');
   const [parentCategories, setParentCategories] = useState([]);
-  const [childrenCategories, setChildrenCategories] = useState([]);
 
   useEffect(() => {
     async function fetchCategories() {
       const categories: Product [] = await getCategories();
       categories.forEach(category => {
-        category.ancestors.length > 0 ? setChildrenCategories((prevState) => [...prevState, category.name.en]) : setParentCategories((prevState) => [...prevState, category.name.en]);
+        category.ancestors.length === 0 && setParentCategories((prevState) => [...prevState, category.name.en]);
       })
 
     }

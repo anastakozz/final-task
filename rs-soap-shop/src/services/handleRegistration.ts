@@ -1,4 +1,4 @@
-import { RegistrationData, ResultProps } from '../lib/interfaces';
+import { RegistrationData, ResultProps } from '@interfaces';
 import { handleLogin } from './handleLogin';
 import { createCustomer } from './registration.service';
 

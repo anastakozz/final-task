@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import React from 'react';
 import { Decor, SelfCare } from './childrenCategories';
-import { SubCategoryProps } from '../../../../lib/interfaces';
+import { SubCategoryProps } from '@interfaces';
 
 export default function SubCategory({ isDropdownOpened, openedCategory, onSelectCategory }: SubCategoryProps) {
   return (

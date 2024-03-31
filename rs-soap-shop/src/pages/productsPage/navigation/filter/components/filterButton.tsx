@@ -1,4 +1,4 @@
-import { ButtonProps } from '../../../../../lib/interfaces';
+import { ButtonProps } from '@interfaces';
 import React from 'react';
 
 export default function FilterButton({ children, onClick, role }: ButtonProps): JSX.Element {

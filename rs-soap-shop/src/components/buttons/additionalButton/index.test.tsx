@@ -1,6 +1,6 @@
 import { render, fireEvent } from '@testing-library/react';
 import AdditionalButton from '.';
-import { ButtonProps } from '../../../lib/interfaces';
+import { ButtonProps } from '@interfaces';
 
 const mockedCallback = jest.fn();
 

@@ -1,5 +1,5 @@
-import CategoryDropdownArrow from '../../../../icons/categoryDropdownArrow';
-import { parentCategoryProps } from '../../../../lib/interfaces';
+import CategoryDropdownArrow from '@icons/categoryDropdownArrow';
+import { parentCategoryProps } from '@interfaces';
 import { useNavigate } from 'react-router-dom';
 
 export default function ParentCategory({

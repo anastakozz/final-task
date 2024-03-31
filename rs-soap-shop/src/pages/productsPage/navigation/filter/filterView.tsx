@@ -2,9 +2,9 @@ import { RadioButtons } from './components/radioButtons';
 import { PriceFilter } from './components/PriceFilter';
 import FilterButton from './components/filterButton';
 import { useState, ChangeEvent } from 'react';
-import FilterIcon from '../../../../icons/filterIcon';
-import { iconClassesActive, iconClassesNormal } from '../../../../lib/constants';
-import { OurProductsCardsProps } from '../../../../lib/interfaces';
+import FilterIcon from '@icons/filterIcon';
+import { iconClassesActive, iconClassesNormal } from '@constants';
+import { OurProductsCardsProps } from '@interfaces';
 import classNames from 'classnames';
 
 export default function FilterView({ changeQuery }: OurProductsCardsProps) {
