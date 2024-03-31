@@ -2,9 +2,12 @@ import { apiUrl, projectKey } from '@constants';
 import { getBasicToken } from './registration.service';
 import axios from 'axios';
 import { CardsPerPage } from '@enums';
+import { getTokenFromStorage } from '@utils/getLocalStorageToken';
+import { Product } from '@interfaces';
+import { getCategoryId } from './category.service';
 
 export async function getProductsList(isCatalogCalling?: boolean, page = 1) {
-  const accessToken = await getBasicToken();
+  const accessToken = await getTokenFromStorage(true);
   let queryParms;
   if (isCatalogCalling) {
     queryParms = {
@@ -45,10 +48,10 @@ export async function findProducts(inputProductName: string) {
   if (inputProductName === '') {
     return await getProductsList();
   }
-  const accessToken = await getBasicToken();
+  const accessToken = await getTokenFromStorage(true);
   try {
     const response = await axios.get(
-      `${apiUrl}/${projectKey}/product-projections/search?text.en="${inputProductName}"`,
+      `${apiUrl}/${projectKey}/product-projections/search?text.en-us="${inputProductName}"`,
       {
         headers: {
           Authorization: `Bearer ${accessToken}`
@@ -62,9 +65,9 @@ export async function findProducts(inputProductName: string) {
 }
 
 export async function getFiltered(options: string, page = 1) {
-  const accessToken = await getBasicToken();
+  const accessToken = await getTokenFromStorage(true);
   try {
-    const response = await axios.get(`${apiUrl}/${projectKey}/product-projections/search${options}`, {
+    const response = await axios.get(`${apiUrl}/${projectKey}/product-projections${options}`, {
       headers: {
         Authorization: `Bearer ${accessToken}`
       },
@@ -77,4 +80,25 @@ export async function getFiltered(options: string, page = 1) {
   } catch (error) {
     return undefined;
   }
+}
+
+export function getCategoryName(category: string, subcategory: string) {
+  if (subcategory) {
+    return subcategory.charAt(0).toUpperCase() + subcategory.slice(1);
+  }
+  return category.charAt(0).toUpperCase() + category.slice(1);
+}
+
+export async function getFilteredProducts(category: string, subcategory: string, query: string, currentPage: number, inputProductName: string) {
+  let filteredProducts: Product[];
+  if (inputProductName) {
+    filteredProducts = await getFiltered(`?text.en-us="${inputProductName}"`);
+  } else if (category || subcategory) {
+    const categoryName = getCategoryName(category, subcategory);
+    const categoryId = await getCategoryId(categoryName);
+    filteredProducts = await getFiltered(`/search?filter=categories.id:"${categoryId}"&${query}`, currentPage);
+  } else {
+    filteredProducts = await getFiltered(`${query}`, currentPage);
+  }
+  return filteredProducts;
 }

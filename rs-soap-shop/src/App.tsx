@@ -1,25 +1,21 @@
 import React, { ReactElement, useEffect, useState, createContext } from 'react';
-
 import './App.css';
 import Header from '@components/header';
 import { Route, Routes } from 'react-router-dom';
-import HomePage from '@pages/homePage';
-import ProductsPage from '@pages/productsPage';
-import AboutPage from '@pages/aboutPage';
-import CartPage from '@pages/cartPage';
-import SingInPage from '@pages/singInPage';
-import SignUpPage from '@pages/singnUpPage';
-import ProfilePage from '@pages/profilePage';
-import Footer from '@components/footer';
-import PageNotFound from '@pages/pageNotFound';
-import DetailedProductPage from '@pages/detailedProductPage';
+import HomePage from './pages/homePage';
+import ProductsPage from './pages/productsPage';
+import AboutPage from './pages/aboutPage';
+import CartPage from './pages/cartPage';
+import SingInPage from './pages/singInPage';
+import SignUpPage from './pages/singnUpPage';
+import ProfilePage from './pages/profilePage';
+import Footer from './components/footer';
+import PageNotFound from './pages/pageNotFound';
+import DetailedProductPage from './pages/detailedProductPage';
 import { setAnonymousToken } from '@services/registration.service';
-import { getCart } from '@services/handleCart';
-import { tokenNames } from '@enums';
-const { userToken, anonymous } = tokenNames;
-
+import { TokenNames } from '@enums';
+const { userToken, anonymous } = TokenNames;
 export const CartContext = createContext(null);
-
 const AppLayout = ({ children }: { children: ReactElement }) => {
   const [cart, setCart] = useState(null);
   return (
@@ -39,19 +35,13 @@ function App() {
   const isSeenBefore = !!localStorage.getItem(`${anonymous}`);
 
   useEffect(() => {
-    if (!isLoggedIn && !isSeenBefore) {
-      setAnonymousToken()
-        .then(() =>
-          getCart()
-            .then(() => setHasToken(true))
-            .catch(err => console.log(err))
-        )
-        .catch(err => console.log(err));
-    } else {
-      getCart()
-        .then(() => setHasToken(true))
-        .catch(err => console.log(err));
+    async function setToken() {
+      if (!isLoggedIn && !isSeenBefore) {
+        await setAnonymousToken()
+      }
+      setHasToken(true);
     }
+    setToken();
   }, []);
 
   return (

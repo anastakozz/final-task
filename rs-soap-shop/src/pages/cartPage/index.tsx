@@ -226,7 +226,6 @@ function CartPage() {
               >
                 <p className='text-h5'>Do you have a promo code? Enter it here:</p>
                 <div>
-
                   {localStorage.getItem('isUser') === 'true' ? (
                     <>
                       <input
@@ -267,7 +266,6 @@ function CartPage() {
                         {promoCodeActivationMessage || localStorage.getItem('promoCodeActivationMessage')}
                       </p>
                     </>
-
                   )}
                 </div>
                 {localStorage.getItem('isUser') === 'true' ? (
@@ -318,7 +316,6 @@ function CartPage() {
                       style: 'currency',
                       currency: `${cart.lineItems[0].variant.prices[0].value.currencyCode}`
                     })}
-
                   </div>
                 )}
               </div>

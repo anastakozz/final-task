@@ -1,7 +1,7 @@
 import { NavLink, useNavigate } from 'react-router-dom';
-import { tokenNames } from '@enums';
+import { TokenNames } from '@enums';
 import { setAnonymousToken } from '@services/registration.service';
-const { userToken, anonymous } = tokenNames;
+const { userToken, anonymous } = TokenNames;
 import { getSpecificCart } from '@services/handleCart';
 
 function LoginAreaModal({

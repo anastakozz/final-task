@@ -12,10 +12,10 @@ module.exports = {
     sourceType: 'module',
     useJSXTextNode: true,
     project: './tsconfig.json',
-    tsconfigRootDir: __dirname
+    tsconfigRootDir: __dirname,
   },
   plugins: ['react', '@typescript-eslint', 'react-hooks', 'prettier'],
-  ignorePatterns: ['tailwind.config.js', '.eslintrc.js', '/coverage/*', '/build/*', 'craco.config.js'],
+  ignorePatterns: ['tailwind.config.js', '.eslintrc.js', '/coverage/*', '/build/*', '**/*.css'],
   rules: {
     '@typescript-eslint/no-explicit-any': 'error',
     'react/react-in-jsx-scope': 'off',

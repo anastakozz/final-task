@@ -6,8 +6,8 @@ import { updateAccountData } from '@services/account.service';
 import { AddressCardI } from '@interfaces';
 import { dataAdapterToFullName } from '.';
 import { validateCity } from '@components/forms/validateFunctions/city';
-import { validatePostalCode } from '@components/forms/validateFunctions/postalCode';
 import { validateStreet } from '@components/forms/validateFunctions/street';
+import { validatePostalCode } from '@components/forms/validateFunctions/postalCode';
 
 const countries = [
   {

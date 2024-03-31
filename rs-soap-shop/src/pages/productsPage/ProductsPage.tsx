@@ -1,164 +1,83 @@
 import OurProductsCards from './cardsSection/OurProductsCards';
 import { NavigationView } from './navigation/navigationView';
-import { useEffect, useState } from 'react';
-import BannerPageName from '@components/bannerPageName';
+import { useEffect, useRef, useState } from 'react';
+import BannerPageName from '../../components/bannerPageName';
 import { useParams } from 'react-router-dom';
-import { getCategoryId } from '@services/category.service';
-import { getFiltered } from '@services/product.service';
+import { getFilteredProducts } from '@services/product.service';
 import { Product } from '@interfaces';
-import scrollToTop from '@utils/scrollToTop';
-import LoadingSpinner from '@components/loading/loading';
+import LoadingSpinner from '../../components/loading/loading';
 
 function ProductsPage() {
-  const [products, setProducts] = useState<Product[]>();
+  const [products, setProducts] = useState<Product[]>([]);
   const { category, subcategory } = useParams();
-  const [query, setQuery] = useState(sessionStorage.getItem('query'));
+  const [query, setQuery] = useState('');
+  const currentQuery = useRef('');
   const [isEndOfPage, setIsEndOfPage] = useState(false);
-  const [isUpdatingProducts, setIsUpdatingProducts] = useState(false);
-  if (!sessionStorage.getItem('isLoading')) sessionStorage.setItem('isLoading', 'false');
-  if (!sessionStorage.getItem('currentPage')) sessionStorage.setItem('currentPage', '1');
-  const searchInput: HTMLInputElement = document.querySelector('#searchInput');
+  const [isLoading, setIsLoading] = useState(false);
+  const page = useRef(1);
+  const [element, setElement] = useState(null);
+  const currentCategory = useRef(category);
+  const currentSubcategory = useRef(subcategory);
+  const currentSearchValue = useRef('');
+  const isFirstLoading = useRef(true);
 
-  useEffect(() => {
-    return () => {
-      sessionStorage.setItem('query', '');
-      sessionStorage.setItem('currentPage', '');
-      sessionStorage.setItem('isLoading', 'false');
-    };
-  }, []);
-
-  window.addEventListener('beforeunload', () => {
-    sessionStorage.setItem('query', '');
-    sessionStorage.setItem('currentPage', '');
-    sessionStorage.setItem('isLoading', 'false');
-  });
-
-  function updateSearchedProducts(products: Product[]) {
-    setProducts(products);
-    setIsEndOfPage(true);
-  }
-
-  function changeQuery(options: string): void {
-    setQuery(options);
-    sessionStorage.setItem('query', options);
-  }
-
-  function updateProductsInCategories() {
-    getCategoryId(
-      subcategory
-        ? subcategory.charAt(0).toUpperCase() + subcategory.slice(1)
-        : category.charAt(0).toUpperCase() + category.slice(1)
-    ).then(categoryId => {
-      getFiltered(`?filter=categories.id:"${categoryId}"&${query}`, 1)
-        .then(products => {
-        setProducts(products);
-      })
-        .then(() => {
-          setIsUpdatingProducts(false);
-          sessionStorage.setItem('isLoading', 'false');
-        });
-    })
-  }
-
-  useEffect(() => {
-    scrollToTop();
-  }, []);
-
-  useEffect(() => {
-    sessionStorage.setItem('isLoading', 'true');
-    sessionStorage.setItem('currentPage', '1');
-    if (searchInput) searchInput.value = '';
-    setIsUpdatingProducts(true);
+  const loadProducts = async () => {
     setIsEndOfPage(false);
-    if (category || subcategory) {
-      updateProductsInCategories();
-    } else {
-      getFiltered(`?${sessionStorage.getItem('query')}`, 1)
-        .then(items => {
-        setProducts(items);
-      })
-        .then(() => {
-            setIsUpdatingProducts(false);
-            sessionStorage.setItem('isLoading', 'false');
-        });
-    }
+    setIsLoading(true);
+    const filteredProducts = await getFilteredProducts(currentCategory.current, currentSubcategory.current, currentQuery.current, page.current, currentSearchValue.current);
+    if (filteredProducts?.length) {
+      setProducts(prevProducts => [...prevProducts, ...filteredProducts]);
+      page.current++
+    } else setIsEndOfPage(true);
+    setIsLoading(false);
+    isFirstLoading.current = false;
+  }
+
+  useEffect(() => {
+    currentCategory.current = category;
+    currentSubcategory.current = subcategory;
+    currentQuery.current = query;
+    page.current = 1;
+    isFirstLoading.current = true;
+
+    setProducts([]);
+    loadProducts();
   }, [category, subcategory, query]);
 
-  useEffect(() => {
-    const handleScroll = () => {
-      if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 300) {
-        if (!(category || subcategory)) {
-          loadNextPage();
-        } else loadNextPageWithCategory();
-      }
-    };
+  const observer = useRef(new IntersectionObserver((entries) => {
+     if (entries[0].isIntersecting && !isFirstLoading.current) {
+      loadProducts();
+    }
+  }, {threshold: 1, rootMargin: '50px'}));
 
-    window.addEventListener('scroll', handleScroll);
+  useEffect(() => {
+    const currentElement = element;
+    const currentObserver = observer.current;
+    if (currentElement) {
+      currentObserver.observe(currentElement);
+    }
 
     return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, [category, subcategory]);
-
-  function loadNextPage() {
-    if (sessionStorage.getItem('isLoading') === 'true') return;
-    sessionStorage.setItem('isLoading', 'true');
-    sessionStorage.setItem('currentPage', String(+sessionStorage.getItem('currentPage') + 1));
-
-    getFiltered(`?${sessionStorage.getItem('query')}`, +sessionStorage.getItem('currentPage'))
-      .then(nextPageProducts => {
-        if (nextPageProducts.length > 0) {
-          setProducts(prevProducts => [...prevProducts, ...nextPageProducts]);
-        } else setIsEndOfPage(true);
-      })
-      .then(() => {
-        sessionStorage.setItem('isLoading', 'false');
-      })
-      .catch(error => {
-        console.error(error);
-      });
-  }
-
-  function loadNextPageWithCategory() {
-    if (sessionStorage.getItem('isLoading') === 'true') return;
-    sessionStorage.setItem('isLoading', 'true');
-    sessionStorage.setItem('currentPage', String(+sessionStorage.getItem('currentPage') + 1));
-    getCategoryId(
-      subcategory
-        ? subcategory.charAt(0).toUpperCase() + subcategory.slice(1)
-        : category.charAt(0).toUpperCase() + category.slice(1)
-    ).then(categoryId => {
-      getFiltered(
-        `?filter=categories.id:"${categoryId}"&${sessionStorage.getItem('query')}`,
-        +sessionStorage.getItem('currentPage')
-      )
-        .then(nextPageProducts => {
-          if (nextPageProducts.length > 0) {
-            setProducts(prevProducts => [...prevProducts, ...nextPageProducts]);
-          } else setIsEndOfPage(true);
-        })
-        .then(() => {
-          sessionStorage.setItem('isLoading', 'false');
-        })
-        .catch(error => {
-          console.error(error);
-        });
-    });
-  }
+      if (currentElement) {
+        currentObserver.unobserve(currentElement);
+      }
+    }
+  }, [element]);
 
   return (
     <>
-      <BannerPageName {...{ children: 'OUR PRODUCTS' }}></BannerPageName>
+      <BannerPageName {...{ children: 'OUR PRODUCTS' }} />
       <NavigationView
         nav={{ category, subcategory }}
-        changeQuery={changeQuery}
-        updateSearchedProducts={updateSearchedProducts}
+        changeQuery={setQuery}
       />
-      {isUpdatingProducts ?
-        <LoadingSpinner marginTop={'60'} /> :
-        <><OurProductsCards {...{ products }} />
-          {!isEndOfPage && <LoadingSpinner marginTop={'10'} />}
-        </>}
+      {products.length > 0 && <OurProductsCards {...{ products }} />}
+      {products.length === 0 && !isLoading &&
+        <div className={'bg-secondaryColor dark:bg-grayMColor flex-1 flex justify-center items-center'}>
+          <p className={'text-center'}>Nothing was found</p>
+        </div>}
+      <div ref={setElement}></div>
+      {isLoading && !isEndOfPage && <LoadingSpinner />}
     </>
   );
 }

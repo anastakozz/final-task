@@ -1,10 +1,9 @@
-import { Product, ProductCardProps } from '@interfaces';
+import { ICart, Product, ProductCardProps } from '@interfaces';
 import { getProductsInCart } from '@services/handleCart';
-import toCardAdapter from '@utils/productDataAdapters.ts/toCardAdapter';
+import toCardAdapter from '../../../lib/utils/productDataAdapters.ts/toCardAdapter';
 
-export async function adaptCardsData(data: Product[]): Promise<ProductCardProps[]> {
-  const cartProducts = await getProductsInCart();
-
+export async function adaptCardsData(data: Product[], cart: ICart): Promise<ProductCardProps[]> {
+  const cartProducts = getProductsInCart(cart);
   if (data) {
     const dataAdapted = data.map((product: Product) => {
       const isInCart = cartProducts.includes(product.id);

@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
-
 import { Product } from '@interfaces';
-import DeleteIcon from '@icons/deleteIcon';
+import DeleteIcon from '../../icons/deleteIcon';
 import { updateProductInCart } from '@services/cart.service';
 import { NavLink } from 'react-router-dom';
 
@@ -22,6 +21,7 @@ export function CartListItem({
     quantity: el.quantity,
     disabled: false
   });
+  console.log(el);
 
   const onDelete = (lineItemId: string) => {
     setItem({

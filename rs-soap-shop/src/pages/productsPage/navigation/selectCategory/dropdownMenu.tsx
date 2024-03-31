@@ -10,7 +10,7 @@ export default function SubCategory({ isDropdownOpened, openedCategory, onSelect
         hidden: !isDropdownOpened
       })}
     >
-      {openedCategory === 'Decor' ? (
+      {openedCategory === 'decor' ? (
         <Decor onSelectCategory={onSelectCategory} />
       ) : (
         <SelfCare onSelectCategory={onSelectCategory} />

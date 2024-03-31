@@ -1,29 +1,16 @@
 import classNames from 'classnames';
-import SearchButton from '@icons/searchButton';
-import { findProducts } from '@services/product.service';
-import React, { useRef } from 'react';
-import { NavigationViewProps } from '@interfaces';
+import SearchButton from '../../../../icons/searchButton';
+import React, { useState } from 'react';
+import { SearchViewProps } from '@interfaces';
 
-export default function SearchView({ updateSearchedProducts }: NavigationViewProps) {
-  const inputRef = useRef(null);
-
-  const handleSearch = async () => {
-    const products = await findProducts(inputRef.current.value);
-    updateSearchedProducts(products);
-  };
-
-  const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'Enter') {
-      handleSearch();
-    }
-  };
+export default function SearchView({ setSearchValue }: SearchViewProps) {
+  const [inputValue, setInputValue] = useState('');
 
   return (
     <div className={'flex'}>
       <div className={'relative flex items-stretch flex-grow'}>
         <input
-          id='searchInput'
-          ref={inputRef}
+          value={inputValue}
           placeholder='Search...'
           className={classNames(
             'px-2 py-1 h-[37px]',
@@ -31,7 +18,8 @@ export default function SearchView({ updateSearchedProducts }: NavigationViewPro
             'bg-white rounded-md border border-gray-300 shadow-sm hover:bg-gray-50',
             'focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accentDarkColor dark:focus:ring-accentColor'
           )}
-          onKeyDown={handleKeyPress}
+          onChange={(e) => setInputValue(e.target.value)}
+          onKeyDown={(e) => e.key === 'Enter' && setSearchValue(inputValue)}
         />
         <div
           className={classNames(
@@ -39,7 +27,7 @@ export default function SearchView({ updateSearchedProducts }: NavigationViewPro
             'rounded-md bg-white border-[1px] border-gray-400 shadow-sm',
             'hover:cursor-pointer hover:bg-graySColor active:scale-90'
           )}
-          onClick={handleSearch}
+          onClick={() => setSearchValue(inputValue)}
         >
           <SearchButton />
         </div>

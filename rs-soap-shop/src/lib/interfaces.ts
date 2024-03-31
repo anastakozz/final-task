@@ -1,5 +1,6 @@
-import { Category, Keyword, Price, ProductAttributes, ProductImage } from './types';
-import React from 'react';
+import { Category, Keyword, Price, ProductAttributes, ProductImage, ProductListItem } from './types';
+import React, { Dispatch, SetStateAction } from 'react';
+import { Control, FieldErrors, UseFormGetValues, UseFormRegister, UseFormSetValue } from 'react-hook-form';
 
 export interface ButtonProps {
   type?: 'button' | 'submit' | 'reset';
@@ -8,11 +9,6 @@ export interface ButtonProps {
   to?: string;
   role?: string;
   notFixedWidth?: boolean;
-}
-
-export interface LoginData {
-  email: string;
-  password: string;
 }
 
 export interface InputProps {
@@ -113,8 +109,8 @@ export interface Product {
       currencyCode: string;
       centAmount: number;
       fractionDigits: number;
-    }
-  }
+    };
+  };
   id: string;
   productKey?: string;
   version: string;
@@ -171,6 +167,7 @@ export interface Product {
   priceMode: string;
   createdAt: string;
   lastModifiedAt: string;
+  ancestors: [];
 }
 
 export interface CategoryData {
@@ -182,14 +179,14 @@ export interface CategoryData {
 export interface parentCategoryProps {
   onSelectCategory: (category: string) => void;
   category: string;
-  option: string;
+  parentCategoryName: string;
   handleCategoryClick: () => void;
   setOpenedCategory: React.Dispatch<React.SetStateAction<string>>;
   openedCategory: string;
 }
 
 export interface CategoryDropdownArrowProps {
-  option: string;
+  parentCategoryName: string;
   openedCategory: string;
   setOpenedCategory: React.Dispatch<React.SetStateAction<string>>;
 }
@@ -241,9 +238,88 @@ export interface NavigationViewProps {
     subcategory?: string;
   };
   changeQuery?: (options: string) => void;
-  updateSearchedProducts?: (products: Product[]) => void;
 }
 
-export interface CartProduct {
-  discountCodes?: object[]
+export interface SearchViewProps {
+  setSearchValue: React.Dispatch<React.SetStateAction<string>>;
+}
+
+export interface ICart {
+  lineItems: ProductListItem[];
+}
+
+export interface ILoginResolver {
+  firstName?: string;
+  secondName?: string;
+  email?: string;
+  password?: string;
+  confirmPassword?: string;
+  date?: Date;
+  country?: string;
+  city?: string;
+  city2?: string;
+  street?: string;
+  street2?: string;
+  house?: string;
+  house2?: string;
+  postalCode?: string;
+  postalCode2?: string;
+  isDefaultBillingAddress?: boolean;
+  isDefaultShippingAddress?: boolean;
+  country2?: string;
+}
+
+export interface IControlledInputContainer {
+  fieldName: string;
+  register: UseFormRegister<ILoginResolver>;
+  errors: string | undefined;
+  type?: string;
+  placeholder: string;
+  setValue: UseFormSetValue<ILoginResolver>;
+  disabled?: boolean;
+  isShipping?: boolean;
+  billingValue?: string;
+}
+
+export interface IDropDown {
+  control: Control<ILoginResolver>;
+  errors: string | undefined;
+  name: 'country' | 'country2';
+  isShippingAddressActive: boolean;
+  isShipping: boolean;
+  billingValue: string;
+  setBillingCountry: Dispatch<SetStateAction<string>>;
+}
+
+export interface IValidationNames {
+  Email: 'email';
+  Password: 'password';
+  ['First name']: 'firstName';
+  ['Second name']: 'secondName';
+  confirmPassword: 'confirmPassword';
+  ['Date of birth']: 'date';
+  Country: 'country';
+  City: 'city';
+  City2: 'city2';
+  Street: 'street';
+  Street2: 'street2';
+  House: 'house';
+  House2: 'house2';
+  ['Postal code']: 'postalCode';
+  ['Postal code2']: 'postalCode2';
+  isDefaultBillingAddress: 'isDefaultBillingAddress';
+  isDefaultShippingAddress: 'isDefaultShippingAddress';
+  Country2: 'country2';
+}
+
+export interface AddressProps {
+  control: Control<ILoginResolver>;
+  errors:  FieldErrors<ILoginResolver>;
+  isShippingAddressActive: boolean;
+  register: UseFormRegister<ILoginResolver>;
+  setValue: UseFormSetValue<ILoginResolver>;
+  isShipping?: boolean;
+  getValues:  UseFormGetValues<ILoginResolver>;
+  setBillingCountry?: Dispatch<SetStateAction<string>>;
+  billingCountry: string;
 }

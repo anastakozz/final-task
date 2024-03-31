@@ -2,23 +2,47 @@ import { SelectCategory } from './selectCategory/selectCategory';
 import SortingView from './sorting/sortingView';
 import FilterView from './filter/filterView';
 import SearchView from './search/searchView';
-import Breadcrumb from '@components/BasicBreadcrumbs';
-import React, { useState } from 'react';
+import Breadcrumb from '../../../components/BasicBreadcrumbs';
+import React, { useEffect, useState } from 'react';
 import { NavigationViewProps } from '@interfaces';
+import { useParams } from 'react-router-dom';
+import { QueryStringPrefix } from '@enums';
 
-export function NavigationView({ nav, changeQuery, updateSearchedProducts }: NavigationViewProps) {
+export function NavigationView({ nav, changeQuery }: NavigationViewProps) {
+  const { category, subcategory } = useParams();
   const [filterQuery, setFilterQuery] = useState('');
   const [sortQuery, setSortQuery] = useState('');
+  const [searchValue, setSearchValue] = useState('');
 
-  function updateFilterQuery(options: string) {
-    setFilterQuery(options);
-    changeQuery(`${options}&${sortQuery}`);
+  const buildQueryString = (isPriceSorting: boolean): string => {
+    if (!filterQuery && !sortQuery) return '';
+
+    let queryString = '';
+    if (!filterQuery) {
+      if (category || subcategory) {
+        queryString = isPriceSorting ? sortQuery.slice(QueryStringPrefix.priceSortLength) : sortQuery.slice(QueryStringPrefix.nameSortLength);
+      } else {
+        queryString = isPriceSorting ? `/${sortQuery.slice(QueryStringPrefix.nameSortLength)}` : `?${sortQuery.slice(QueryStringPrefix.nameSortLength)}`;
+      }
+    } else if (!sortQuery) {
+      queryString = category || subcategory ? `${filterQuery}` : `/search?${filterQuery}`;
+    } else {
+      if (category || subcategory) {
+        queryString = isPriceSorting ? `${filterQuery}&${sortQuery.slice(QueryStringPrefix.priceSortLength)}` : `${filterQuery}&${sortQuery.slice(QueryStringPrefix.nameSortLength)}`;
+      } else queryString = isPriceSorting ? `/search?${filterQuery}&${sortQuery.slice(QueryStringPrefix.priceSortLength)}` : `/search?${filterQuery}&${sortQuery.slice(QueryStringPrefix.nameSortLength)}`;
+    }
+    return queryString;
   }
 
-  function updateSortQuery(options: string) {
-    setSortQuery(options);
-    changeQuery(`${filterQuery}&${options}`);
-  }
+  useEffect(() => {
+    searchValue === '' ? changeQuery('') : changeQuery(`/search?text.en="${searchValue}"`);
+  }, [searchValue]);
+
+  useEffect(() => {
+    const isPriceSorting = sortQuery.includes('price');
+    const queryString = buildQueryString(isPriceSorting);
+    changeQuery(queryString);
+  }, [sortQuery, filterQuery, category, subcategory]);
 
   return (
     <div role='catalog-nav' className='bg-accentColor dark:bg-accentDarkColor text-primaryColor '>
@@ -26,10 +50,10 @@ export function NavigationView({ nav, changeQuery, updateSearchedProducts }: Nav
         <Breadcrumb nav={nav} />
         <div className='flex flex-wrap gap-[10px]'>
           <SelectCategory nav={nav} />
-          <SearchView updateSearchedProducts={updateSearchedProducts} />
+          <SearchView setSearchValue={setSearchValue} />
           <div className='flex flex-wrap gap-[10px] flex-row-reverse'>
-            <FilterView changeQuery={updateFilterQuery} />
-            <SortingView changeQuery={updateSortQuery} />
+            <FilterView changeQuery={setFilterQuery} />
+            <SortingView changeQuery={setSortQuery} />
           </div>
         </div>
       </div>

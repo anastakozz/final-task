@@ -1,12 +1,12 @@
 import { NavLink, useNavigate } from 'react-router-dom';
-import ProfileIcon from '@icons/profileIcon';
-import ProfileIconDark from '@icons/profileIconDark';
-import LogoutIcon from '@icons/logoutIcon';
-import LogoutIconDark from '@icons/logoutIconDark';
-import { tokenNames } from '@enums';
+import ProfileIcon from '../../../icons/profileIcon';
+import ProfileIconDark from '../../../icons/profileIconDark';
+import LogoutIcon from '../../../icons/logoutIcon';
+import LogoutIconDark from '../../../icons/logoutIconDark';
+import { TokenNames } from '@enums';
 import { setAnonymousToken } from '@services/registration.service';
 import { getSpecificCart } from '@services/handleCart';
-const { userToken, anonymous } = tokenNames;
+const { userToken, anonymous } = TokenNames;
 
 function LoginArea({ isLoggedIn, onLogout }: { isLoggedIn: boolean; onLogout: () => void }) {
   const navigate = useNavigate();

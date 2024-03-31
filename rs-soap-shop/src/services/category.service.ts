@@ -1,10 +1,9 @@
-import { getBasicToken } from './registration.service';
 import axios from 'axios';
 import { apiUrl, projectKey } from '@constants';
-import { CategoryData } from '@interfaces';
+import { getTokenFromStorage } from '@utils/getLocalStorageToken';
 
 export async function getCategoryId(key: string) {
-  const accessToken = await getBasicToken();
+  const accessToken = await getTokenFromStorage(true);
   try {
     const response = await axios.get(`${apiUrl}/${projectKey}/categories/key=${key}`, {
       headers: {
@@ -18,7 +17,7 @@ export async function getCategoryId(key: string) {
 }
 
 export async function getCategories() {
-  const accessToken = await getBasicToken();
+  const accessToken = await getTokenFromStorage(true);
   try {
     const response = await axios.get(`${apiUrl}/${projectKey}/categories/`, {
       headers: {
@@ -28,18 +27,6 @@ export async function getCategories() {
 
     return response.data.results;
   } catch (error) {
-    return undefined;
-  }
-}
-
-export async function getCategoriesNames() {
-  const categoriesData = await getCategories();
-  try {
-    return categoriesData.map((categoryData: CategoryData) => {
-      const categoryName: string = categoryData.name.en;
-      return categoryName[0].toUpperCase() + categoryName.slice(1);
-    });
-  } catch {
     return undefined;
   }
 }
