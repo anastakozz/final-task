@@ -4,7 +4,6 @@ import toCardAdapter from '../../../lib/utils/productDataAdapters.ts/toCardAdapt
 
 export async function adaptCardsData(data: Product[], cart: ICart): Promise<ProductCardProps[]> {
   const cartProducts = getProductsInCart(cart);
-
   if (data) {
     const dataAdapted = data.map((product: Product) => {
       const isInCart = cartProducts.includes(product.id);

@@ -19,6 +19,7 @@ function ProductsPage() {
   const currentCategory = useRef(category);
   const currentSubcategory = useRef(subcategory);
   const currentSearchValue = useRef('');
+  const isFirstLoading = useRef(true);
 
   const loadProducts = async () => {
     setIsEndOfPage(false);
@@ -29,24 +30,27 @@ function ProductsPage() {
       page.current++
     } else setIsEndOfPage(true);
     setIsLoading(false);
+    isFirstLoading.current = false;
   }
-
-  useEffect(() => {
-    page.current = 1;
-    setProducts([]);
-  }, [category, subcategory, query]);
-
-  const observer = useRef(new IntersectionObserver((entries) => {
-    if (entries[0].isIntersecting) {
-      loadProducts();
-    }
-  }, {threshold: 1, rootMargin: '50px'}));
 
   useEffect(() => {
     currentCategory.current = category;
     currentSubcategory.current = subcategory;
     currentQuery.current = query;
+    page.current = 1;
+    isFirstLoading.current = true;
 
+    setProducts([]);
+    loadProducts();
+  }, [category, subcategory, query]);
+
+  const observer = useRef(new IntersectionObserver((entries) => {
+     if (entries[0].isIntersecting && !isFirstLoading.current) {
+      loadProducts();
+    }
+  }, {threshold: 1, rootMargin: '50px'}));
+
+  useEffect(() => {
     const currentElement = element;
     const currentObserver = observer.current;
     if (currentElement) {
@@ -58,7 +62,7 @@ function ProductsPage() {
         currentObserver.unobserve(currentElement);
       }
     }
-  }, [element, category, subcategory, query]);
+  }, [element]);
 
   return (
     <>

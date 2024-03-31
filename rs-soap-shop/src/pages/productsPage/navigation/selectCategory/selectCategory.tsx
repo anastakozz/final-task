@@ -20,6 +20,7 @@ export const SelectCategory = ({ nav }: NavigationViewProps) => {
       categories.forEach(category => {
         category.ancestors.length > 0 ? setChildrenCategories((prevState) => [...prevState, category.name.en]) : setParentCategories((prevState) => [...prevState, category.name.en]);
       })
+
     }
 
     fetchCategories();
